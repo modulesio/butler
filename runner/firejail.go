@@ -8,7 +8,12 @@ import (
 	"path/filepath"
 
 	"github.com/go-errors/errors"
+  "github.com/itchio/wharf/state"
+	"github.com/modulesio/butler/cmd/elevate"
+	"github.com/modulesio/butler/cmd/operate"
+  "github.com/modulesio/butler/installer"
 	"github.com/modulesio/butler/runner/policies"
+	"github.com/modulesio/butler/cmd/linuxsandbox"
 )
 
 type firejailRunner struct {
@@ -32,12 +37,65 @@ func (fr *firejailRunner) Prepare() error {
 func (fr *firejailRunner) Run() error {
 	params := fr.params
 
-	firejailName := fmt.Sprintf("firejail-%s", params.Runtime.Arch())
-	firejailPath := filepath.Join(params.PrereqsDir, firejailName, "firejail")
+  nullConsumer := &state.Consumer{}
+	err := linuxsandbox.Check(nullConsumer)
+	if err != nil {
+		fmt.Printf("Sandbox check failed: %s", err.Error())
+
+		/* ctx := wr.params.Ctx
+		conn := wr.params.Conn
+
+		var r buse.AllowSandboxSetupResponse
+		err := conn.Call(ctx, "AllowSandboxSetup", &buse.AllowSandboxSetupParams{}, &r)
+		if err != nil {
+			return errors.Wrap(err, 0)
+		}
+
+		if !r.Allow {
+			return operate.ErrAborted
+		} */
+		fmt.Printf("Proceeding with sandbox setup...")
+
+		res, err := installer.RunSelf(&installer.RunSelfParams{
+			Consumer: nullConsumer,
+			Args: []string{
+				"--elevate",
+				"linuxsandbox",
+				"setup",
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, 0)
+		}
+
+    fmt.Printf("check exit code %v", res.ExitCode)
+
+    if res.ExitCode != 0 {
+			if res.ExitCode == elevate.ExitCodeAccessDenied {
+				return operate.ErrAborted
+			}
+		}
+
+		err = installer.CheckExitCode(res.ExitCode, err)
+		if err != nil {
+			return errors.Wrap(err, 0)
+		}
+
+		fmt.Printf("Proceeding with sandbox setup...")
+  }
+
+  executable, err := os.Executable()
+  if err != nil {
+    return errors.Wrap(err, 0)
+  }
+
+	// firejailName := fmt.Sprintf("firejail-%s", params.Runtime.Arch())
+	// firejailPath := filepath.Join(params.PrereqsDir, /*firejailName,*/ "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "firejail")
 
 	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.profile")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
-	err := os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
+	err = os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}

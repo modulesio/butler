@@ -139,7 +139,7 @@ func doSetup(ctx *mansion.Context) {
 
 func Setup() error {
 	startTime := time.Now()
-  
+
   fmt.Printf("Setup")
 
 	nullConsumer := &state.Consumer{}

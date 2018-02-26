@@ -3,6 +3,7 @@
 package elevate
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"syscall"
@@ -32,7 +33,7 @@ func Elevate(params *ElevateParams) (int, error) {
 	args = append(args, "--")
 	args = append(args, params.Command...)
 
-	cmd := exec.Command("pkexec", args...)
+	cmd := exec.Command("sudo", args...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

@@ -27,8 +27,8 @@ import (
 	"github.com/modulesio/butler/cmd/prereqs"
 	/* "github.com/modulesio/butler/cmd/probe"
 	"github.com/modulesio/butler/cmd/push"
-	"github.com/modulesio/butler/cmd/repack"
-	"github.com/modulesio/butler/cmd/run" */
+	"github.com/modulesio/butler/cmd/repack" */
+	"github.com/modulesio/butler/cmd/run"
 	"github.com/modulesio/butler/cmd/runner"
 	/* "github.com/modulesio/butler/cmd/service"
 	"github.com/modulesio/butler/cmd/sign"
@@ -43,6 +43,7 @@ import (
 	"github.com/modulesio/butler/cmd/walk"
 	"github.com/modulesio/butler/cmd/which" */
 	"github.com/modulesio/butler/cmd/winsandbox"
+	"github.com/modulesio/butler/cmd/linuxsandbox"
 	/* "github.com/modulesio/butler/cmd/wipe" */
 	"github.com/modulesio/butler/mansion"
 )
@@ -98,7 +99,7 @@ func registerCommands(ctx *mansion.Context) {
 
 	pipe.Register(ctx)
 	elevate.Register(ctx)
-	// run.Register(ctx)
+	run.Register(ctx)
 	runner.Register(ctx)
 
 	/* exeprops.Register(ctx)
@@ -111,4 +112,5 @@ func registerCommands(ctx *mansion.Context) {
 	service.Register(ctx) */
 
 	winsandbox.Register(ctx)
+	linuxsandbox.Register(ctx)
 }
