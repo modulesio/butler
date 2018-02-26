@@ -2,10 +2,10 @@ package operate
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/wipe"
-	"github.com/itchio/butler/installer"
-	"github.com/itchio/butler/installer/bfs"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/wipe"
+	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/butler/installer/bfs"
 )
 
 func uninstall(oc *OperationContext, meta *MetaSubcontext) error {

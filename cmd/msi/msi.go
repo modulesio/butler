@@ -1,7 +1,7 @@
 package msi
 
-import "github.com/itchio/butler/mansion"
-import "github.com/itchio/butler/comm"
+import "github.com/modulesio/butler/mansion"
+import "github.com/modulesio/butler/comm"
 
 var infoArgs = struct {
 	msiPath *string

@@ -14,14 +14,14 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/itchio/butler/runner/syscallex"
+	"github.com/modulesio/butler/runner/syscallex"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/comm"
-	"github.com/itchio/butler/runner/winutil"
+	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/butler/runner/winutil"
 	"github.com/itchio/wharf/state"
 
-	"github.com/itchio/butler/mansion"
+	"github.com/modulesio/butler/mansion"
 )
 
 var setfilepermissionsArgs = struct {

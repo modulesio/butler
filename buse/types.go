@@ -3,9 +3,9 @@ package buse
 import (
 	"time"
 
-	"github.com/itchio/butler/cmd/launch/manifest"
-	"github.com/itchio/butler/configurator"
-	"github.com/itchio/butler/installer/bfs"
+	"github.com/modulesio/butler/cmd/launch/manifest"
+	"github.com/modulesio/butler/configurator"
+	"github.com/modulesio/butler/installer/bfs"
 	itchio "github.com/itchio/go-itchio"
 )
 

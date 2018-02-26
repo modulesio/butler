@@ -5,8 +5,8 @@ import (
 	"time"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/itchio/butler/installer"
-	"github.com/itchio/butler/installer/bfs"
+	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/butler/installer/bfs"
 	"github.com/itchio/savior/seeksource"
 	"github.com/itchio/wharf/eos"
 	"github.com/itchio/wharf/tlc"

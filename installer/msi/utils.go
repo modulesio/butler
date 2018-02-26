@@ -1,8 +1,8 @@
 package msi
 
 import (
-	"github.com/itchio/butler/cmd/msi"
-	"github.com/itchio/butler/installer"
+	"github.com/modulesio/butler/cmd/msi"
+	"github.com/modulesio/butler/installer"
 	"github.com/itchio/wharf/state"
 	"github.com/mitchellh/mapstructure"
 )

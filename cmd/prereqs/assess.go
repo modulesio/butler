@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/itchio/butler/manager"
+	"github.com/modulesio/butler/manager"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/redist"
+	"github.com/modulesio/butler/redist"
 )
 
 type PrereqAssessment struct {

@@ -11,7 +11,7 @@ import (
 	"syscall"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/win32"
+	"github.com/modulesio/butler/win32"
 	"github.com/natefinch/npipe"
 )
 

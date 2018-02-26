@@ -5,11 +5,11 @@ import (
 	"io"
 	"runtime"
 
-	// "github.com/itchio/butler/buse"
-	// "github.com/itchio/butler/cmd/operate"
-	"github.com/itchio/butler/manager"
+	// "github.com/modulesio/butler/buse"
+	// "github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/butler/manager"
 	// "github.com/itchio/wharf/state"
-  // "github.com/itchio/butler/mansion"
+  // "github.com/modulesio/butler/mansion"
 )
 
 type RunnerParams struct {

@@ -3,8 +3,8 @@
 package prereqs
 
 import (
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/comm"
 	"github.com/itchio/wharf/state"
 )
 

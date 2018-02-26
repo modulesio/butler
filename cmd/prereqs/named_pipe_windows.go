@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/comm"
 	"github.com/itchio/wharf/state"
 	"github.com/natefinch/npipe"
 )

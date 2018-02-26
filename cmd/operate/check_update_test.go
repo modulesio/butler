@@ -6,11 +6,11 @@ import (
 
 	"gopkg.in/jarcoal/httpmock.v1"
 
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/operate"
-	"github.com/itchio/butler/cmd/operate/harness"
-	"github.com/itchio/butler/cmd/operate/harness/mockharness"
-	"github.com/itchio/butler/cmd/operate/loopbackconn"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/butler/cmd/operate/harness"
+	"github.com/modulesio/butler/cmd/operate/harness/mockharness"
+	"github.com/modulesio/butler/cmd/operate/loopbackconn"
 	itchio "github.com/itchio/go-itchio"
 	"github.com/itchio/wharf/state"
 	"github.com/itchio/wharf/wtest"

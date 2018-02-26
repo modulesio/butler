@@ -3,7 +3,7 @@ package manager_test
 import (
 	"testing"
 
-	"github.com/itchio/butler/manager"
+	"github.com/modulesio/butler/manager"
 	itchio "github.com/itchio/go-itchio"
 	"github.com/stretchr/testify/assert"
 )

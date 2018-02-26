@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/runner/macutil"
-	"github.com/itchio/butler/runner/policies"
+	"github.com/modulesio/butler/runner/macutil"
+	"github.com/modulesio/butler/runner/policies"
 )
 
 var investigateSandbox = os.Getenv("INVESTIGATE_SANDBOX") == "1"

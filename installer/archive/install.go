@@ -7,10 +7,10 @@ import (
 	"github.com/itchio/savior"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/cmd/operate"
-	"github.com/itchio/butler/installer"
-	"github.com/itchio/butler/installer/archive/intervalsaveconsumer"
-	"github.com/itchio/butler/installer/bfs"
+	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/butler/installer/archive/intervalsaveconsumer"
+	"github.com/modulesio/butler/installer/bfs"
 )
 
 func (m *Manager) Install(params *installer.InstallParams) (*installer.InstallResult, error) {

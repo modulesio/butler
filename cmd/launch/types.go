@@ -3,12 +3,12 @@ package launch
 import (
 	"context"
 
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/manager"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/manager"
 
-	"github.com/itchio/butler/cmd/launch/manifest"
-	"github.com/itchio/butler/cmd/operate"
-	"github.com/itchio/butler/configurator"
+	"github.com/modulesio/butler/cmd/launch/manifest"
+	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/butler/configurator"
 	"github.com/itchio/wharf/state"
 )
 

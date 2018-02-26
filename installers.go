@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/itchio/butler/installer/archive"
-	"github.com/itchio/butler/installer/inno"
-	"github.com/itchio/butler/installer/msi"
-	"github.com/itchio/butler/installer/naked"
-	"github.com/itchio/butler/installer/nsis"
+	"github.com/modulesio/butler/installer/archive"
+	"github.com/modulesio/butler/installer/inno"
+	"github.com/modulesio/butler/installer/msi"
+	"github.com/modulesio/butler/installer/naked"
+	"github.com/modulesio/butler/installer/nsis"
 )
 
 func init() {

@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/itchio/butler/cmd/sizeof"
-	"github.com/itchio/butler/cmd/wipe"
+	"github.com/modulesio/butler/cmd/sizeof"
+	"github.com/modulesio/butler/cmd/wipe"
 	"github.com/itchio/wharf/state"
 
-	"github.com/itchio/butler/buse"
+	"github.com/modulesio/butler/buse"
 )
 
 func CleanDownloadsSearch(params *buse.CleanDownloadsSearchParams, consumer *state.Consumer) (*buse.CleanDownloadsSearchResult, error) {

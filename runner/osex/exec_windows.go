@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/itchio/butler/runner/syscallex"
+	"github.com/modulesio/butler/runner/syscallex"
 )
 
 // ProcAttr holds the attributes that will be applied to a new process

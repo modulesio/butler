@@ -5,18 +5,18 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/itchio/butler/installer"
+	"github.com/modulesio/butler/installer"
 
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/elevate"
-	"github.com/itchio/butler/cmd/operate"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/elevate"
+	"github.com/modulesio/butler/cmd/operate"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/cmd/winsandbox"
-	"github.com/itchio/butler/comm"
-	"github.com/itchio/butler/runner/execas"
-	"github.com/itchio/butler/runner/syscallex"
-	"github.com/itchio/butler/runner/winutil"
+	"github.com/modulesio/butler/cmd/winsandbox"
+	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/butler/runner/execas"
+	"github.com/modulesio/butler/runner/syscallex"
+	"github.com/modulesio/butler/runner/winutil"
 	"github.com/itchio/wharf/state"
 )
 

@@ -2,7 +2,7 @@ package push
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/filtering"
+	"github.com/modulesio/butler/filtering"
 	"github.com/itchio/wharf/pools"
 	"github.com/itchio/wharf/tlc"
 	"github.com/itchio/wharf/wsync"

@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/operate/harness"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/operate/harness"
 	"github.com/itchio/go-itchio"
 	"github.com/itchio/wharf/state"
 )

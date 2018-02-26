@@ -1,6 +1,6 @@
 package naked
 
-import "github.com/itchio/butler/installer"
+import "github.com/modulesio/butler/installer"
 
 type Manager struct {
 }

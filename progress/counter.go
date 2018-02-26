@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/itchio/butler/pb"
+	"github.com/modulesio/butler/pb"
 	"github.com/itchio/httpkit/timeout"
 )
 

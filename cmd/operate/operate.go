@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/comm"
 )
 
 // ErrCancelled is returned when the client asked for an operation to be cancelled

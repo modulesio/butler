@@ -8,8 +8,8 @@ import (
 	"github.com/itchio/savior"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/archive"
-	"github.com/itchio/butler/configurator"
+	"github.com/modulesio/butler/archive"
+	"github.com/modulesio/butler/configurator"
 	"github.com/itchio/wharf/eos"
 	"github.com/itchio/wharf/state"
 )

@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/itchio/butler/manager"
+	"github.com/modulesio/butler/manager"
 	"github.com/mitchellh/mapstructure"
 
 	"github.com/BurntSushi/toml"

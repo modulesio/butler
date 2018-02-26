@@ -6,13 +6,13 @@ import (
 	"strings"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/itchio/butler/manager"
+	"github.com/modulesio/butler/manager"
 	"github.com/itchio/wharf/state"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/comm"
-	"github.com/itchio/butler/mansion"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/butler/mansion"
 	itchio "github.com/itchio/go-itchio"
 	"github.com/sourcegraph/jsonrpc2"
 )

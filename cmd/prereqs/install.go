@@ -7,13 +7,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/itchio/butler/manager"
+	"github.com/modulesio/butler/manager"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/elevate"
-	"github.com/itchio/butler/cmd/operate"
-	"github.com/itchio/butler/installer"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/elevate"
+	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/butler/installer"
 	"github.com/mitchellh/mapstructure"
 )
 

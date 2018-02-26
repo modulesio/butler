@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/runner/policies"
+	"github.com/modulesio/butler/runner/policies"
 )
 
 type firejailRunner struct {

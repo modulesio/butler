@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/itchio/butler/cmd/launch/launchers/html"
-	"github.com/itchio/butler/cmd/launch/launchers/native"
-	"github.com/itchio/butler/cmd/launch/launchers/shell"
-	"github.com/itchio/butler/cmd/launch/launchers/url"
+	"github.com/modulesio/butler/cmd/launch/launchers/html"
+	"github.com/modulesio/butler/cmd/launch/launchers/native"
+	"github.com/modulesio/butler/cmd/launch/launchers/shell"
+	"github.com/modulesio/butler/cmd/launch/launchers/url"
 )
 
 func init() {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/comm"
 	"github.com/itchio/wharf/pwr"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )

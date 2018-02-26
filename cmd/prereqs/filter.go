@@ -2,8 +2,8 @@ package prereqs
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/manager"
-	"github.com/itchio/butler/redist"
+	"github.com/modulesio/butler/manager"
+	"github.com/modulesio/butler/redist"
 )
 
 func (pc *PrereqsContext) FilterPrereqs(names []string) ([]string, error) {

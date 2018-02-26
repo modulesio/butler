@@ -8,7 +8,7 @@ import (
 	"net"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/comm"
 	"github.com/sourcegraph/jsonrpc2"
 )
 

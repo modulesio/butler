@@ -8,10 +8,10 @@ import (
 	"github.com/itchio/savior"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/cmd/dl"
-	"github.com/itchio/butler/cmd/operate/downloadextractor"
-	"github.com/itchio/butler/comm"
-	"github.com/itchio/butler/installer/archive/intervalsaveconsumer"
+	"github.com/modulesio/butler/cmd/dl"
+	"github.com/modulesio/butler/cmd/operate/downloadextractor"
+	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/butler/installer/archive/intervalsaveconsumer"
 	"github.com/itchio/wharf/eos"
 	"github.com/itchio/wharf/state"
 )

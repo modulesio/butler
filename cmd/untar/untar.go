@@ -2,8 +2,8 @@ package untar
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/comm"
-	"github.com/itchio/butler/mansion"
+	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/butler/mansion"
 	"github.com/itchio/wharf/archiver"
 )
 

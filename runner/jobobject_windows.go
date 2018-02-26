@@ -9,7 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/runner/syscallex"
+	"github.com/modulesio/butler/runner/syscallex"
 	"github.com/itchio/wharf/state"
 )
 

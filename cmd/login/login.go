@@ -2,8 +2,8 @@ package login
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/mansion"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/butler/comm"
 )
 
 func Register(ctx *mansion.Context) {

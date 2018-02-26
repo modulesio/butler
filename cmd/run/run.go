@@ -6,7 +6,7 @@ import (
 	"syscall"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/mansion"
+	"github.com/modulesio/butler/mansion"
 )
 
 var args = struct {

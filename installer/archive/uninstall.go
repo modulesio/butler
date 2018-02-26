@@ -1,6 +1,6 @@
 package archive
 
-import "github.com/itchio/butler/installer"
+import "github.com/modulesio/butler/installer"
 
 func (m *Manager) Uninstall(params *installer.UninstallParams) error {
 	// install folder is getting wiped anyway, nothing

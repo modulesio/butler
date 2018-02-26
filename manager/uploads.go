@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/comm"
 	itchio "github.com/itchio/go-itchio"
 )
 

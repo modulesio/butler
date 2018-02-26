@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/itchio/butler/buse"
+	"github.com/modulesio/butler/buse"
 
-	"github.com/itchio/butler/cmd/operate"
+	"github.com/modulesio/butler/cmd/operate"
 	"github.com/itchio/wharf/state"
 )
 

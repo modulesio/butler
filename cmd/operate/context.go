@@ -10,11 +10,11 @@ import (
 
 	"github.com/dchest/safefile"
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/wipe"
-	"github.com/itchio/butler/comm"
-	"github.com/itchio/butler/pb"
-	"github.com/itchio/butler/progress"
+	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/wipe"
+	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/butler/pb"
+	"github.com/modulesio/butler/progress"
 	"github.com/itchio/wharf/state"
 	"github.com/mitchellh/mapstructure"
 )

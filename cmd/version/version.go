@@ -3,7 +3,7 @@ package version
 import (
 	"log"
 
-	"github.com/itchio/butler/mansion"
+	"github.com/modulesio/butler/mansion"
 )
 
 func Register(ctx *mansion.Context) {

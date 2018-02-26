@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/comm"
+	"github.com/modulesio/butler/comm"
 	"github.com/itchio/go-itchio"
 )
 

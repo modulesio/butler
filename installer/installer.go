@@ -5,8 +5,8 @@ import (
 	"errors"
 	"os"
 
-	"github.com/itchio/butler/archive"
-	"github.com/itchio/butler/installer/bfs"
+	"github.com/modulesio/butler/archive"
+	"github.com/modulesio/butler/installer/bfs"
 	"github.com/itchio/wharf/eos"
 	"github.com/itchio/wharf/state"
 )

@@ -3,7 +3,7 @@ package harness
 import (
 	"errors"
 
-	"github.com/itchio/butler/buse"
+	"github.com/modulesio/butler/buse"
 	itchio "github.com/itchio/go-itchio"
 )
 

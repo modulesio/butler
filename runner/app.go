@@ -7,7 +7,7 @@ import (
 	"os/signal"
 
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/runner/macutil"
+	"github.com/modulesio/butler/runner/macutil"
 )
 
 type appRunner struct {

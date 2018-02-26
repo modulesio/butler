@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	// "github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/launch"
-	"github.com/itchio/butler/cmd/operate"
-	// "github.com/itchio/butler/cmd/wipe"
-	"github.com/itchio/butler/runner"
+	// "github.com/modulesio/butler/buse"
+	"github.com/modulesio/butler/cmd/launch"
+	"github.com/modulesio/butler/cmd/operate"
+	// "github.com/modulesio/butler/cmd/wipe"
+	"github.com/modulesio/butler/runner"
 )
 
 func Register() {

@@ -2,9 +2,9 @@ package msi
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/itchio/butler/cmd/elevate"
-	"github.com/itchio/butler/cmd/operate"
-	"github.com/itchio/butler/installer"
+	"github.com/modulesio/butler/cmd/elevate"
+	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/butler/installer"
 )
 
 func (m *Manager) Uninstall(params *installer.UninstallParams) error {
