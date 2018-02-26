@@ -49,15 +49,16 @@ func (ser *sandboxExecRunner) Run() error {
 	fmt.Printf("Creating shim app bundle to enable sandboxing")
 	realBundlePath := params.FullTargetPath
 
-	binaryPath, err := macutil.GetExecutablePath(realBundlePath)
+  binaryPath := realBundlePath;
+	/* binaryPath, err := macutil.GetExecutablePath(realBundlePath)
 	if err != nil {
 		return errors.Wrap(err, 0)
-	}
-	binaryName := filepath.Base(binaryPath)
+	} */
+	// binaryName := filepath.Base(binaryPath)
 
 	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.sb")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
-	err = os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
+	err := os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
@@ -100,9 +101,9 @@ func (ser *sandboxExecRunner) Run() error {
 
 	shimBinaryPath := filepath.Join(
 		shimBundlePath,
-		"Contents",
+		/* "Contents",
 		"MacOS",
-		binaryName,
+		binaryName, */
 	)
 	err = os.MkdirAll(filepath.Dir(shimBinaryPath), 0755)
 	if err != nil {
@@ -118,12 +119,12 @@ func (ser *sandboxExecRunner) Run() error {
 		binaryPath,
 	)
 
-	err = ioutil.WriteFile(shimBinaryPath, []byte(shimBinaryContents), 0744)
+	err = ioutil.WriteFile(shimBinaryPath, []byte(shimBinaryContents), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	err = os.Symlink(
+	/* err = os.Symlink(
 		filepath.Join(realBundlePath, "Contents", "Resources"),
 		filepath.Join(shimBundlePath, "Contents", "Resources"),
 	)
@@ -137,7 +138,7 @@ func (ser *sandboxExecRunner) Run() error {
 	)
 	if err != nil {
 		return errors.Wrap(err, 0)
-	}
+	} */
 
 	if investigateSandbox {
 		fmt.Printf("Wrote shim app to (%s), waiting forever because INVESTIGATE_SANDBOX is set to 1")

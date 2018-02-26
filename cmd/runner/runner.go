@@ -35,7 +35,7 @@ func Do() error {
 	dir := *args.dir */
 
   dirPath := "/tmp/app"
-  fullTargetPath := "/tmp/app/node"
+  fullTargetPath := "/tmp/app/true"
   installPath := "/tmp/app/install"
   var args []string = []string{}
   envBlock := os.Environ()

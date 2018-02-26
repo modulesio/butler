@@ -7,7 +7,7 @@ import (
 	"os/signal"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/runner/macutil"
+	// "github.com/modulesio/butler/runner/macutil"
 )
 
 type appRunner struct {
@@ -37,24 +37,10 @@ func (ar *appRunner) Run() error {
 	)
 }
 
-func RunAppBundle(params *RunnerParams, bundlePath string) error {
-	var args = []string{
-		"-W",
-		bundlePath,
-		"--args",
-	}
-	args = append(args, params.Args...)
+func RunAppBundle(params *RunnerParams, binPath string) error {
+	fmt.Printf("Actual binary is (%s) %v", binPath, params.Args)
 
-	fmt.Printf("App bundle is (%s)", bundlePath)
-
-	binaryPath, err := macutil.GetExecutablePath(bundlePath)
-	if err != nil {
-		return errors.Wrap(err, 0)
-	}
-
-	fmt.Printf("Actual binary is (%s)", binaryPath)
-
-	cmd := exec.Command("open", args...)
+	cmd := exec.Command(binPath, params.Args...)
 	// I doubt this matters
 	cmd.Dir = params.Dir
 	cmd.Env = params.Env
@@ -82,7 +68,7 @@ func RunAppBundle(params *RunnerParams, bundlePath string) error {
 
 		fmt.Printf("Killing app...")
 		// TODO: kill the actual binary, not the app
-		cmd := exec.Command("pkill", "-f", binaryPath)
+		cmd := exec.Command("pkill", "-f", binPath)
 		err := cmd.Run()
 		if err != nil {
 			fmt.Printf("While killing: %s", err.Error())
@@ -90,7 +76,7 @@ func RunAppBundle(params *RunnerParams, bundlePath string) error {
 		os.Exit(0)
 	}()
 
-	err = cmd.Run()
+	err := cmd.Run()
 	close(processDone)
 	if err != nil {
 		return errors.Wrap(err, 0)
