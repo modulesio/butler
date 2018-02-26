@@ -42,8 +42,8 @@ import (
 	"github.com/modulesio/butler/cmd/version"
 	"github.com/modulesio/butler/cmd/walk"
 	"github.com/modulesio/butler/cmd/which" */
-	"github.com/modulesio/butler/cmd/winsandbox"
 	"github.com/modulesio/butler/cmd/linuxsandbox"
+	"github.com/modulesio/butler/cmd/winsandbox"
 	/* "github.com/modulesio/butler/cmd/wipe" */
 	"github.com/modulesio/butler/mansion"
 )

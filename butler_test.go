@@ -14,14 +14,14 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/go-errors/errors"
+	"github.com/itchio/savior/seeksource"
+	"github.com/itchio/wharf/eos"
+	"github.com/itchio/wharf/pwr"
 	"github.com/modulesio/butler/cmd/apply"
 	"github.com/modulesio/butler/cmd/diff"
 	"github.com/modulesio/butler/cmd/ditto"
 	"github.com/modulesio/butler/cmd/sign"
 	"github.com/modulesio/butler/comm"
-	"github.com/itchio/savior/seeksource"
-	"github.com/itchio/wharf/eos"
-	"github.com/itchio/wharf/pwr"
 	"github.com/stretchr/testify/assert"
 )
 
