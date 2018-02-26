@@ -15,13 +15,17 @@ import (
 )
 
 var args = struct {
-	dir     *string
+	directory     *string
+  installPath     *string
+  prereqsPath     *string
 	command *[]string
 }{}
 
 func Register(ctx *mansion.Context) {
 	cmd := ctx.App.Command("runner", "Runs a command").Hidden()
-	args.dir = cmd.Flag("dir", "The working directory for the command").Hidden().String()
+	args.directory = cmd.Flag("directory", "The working directory for the command").Hidden().String()
+  args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").Hidden().String()
+  args.prereqsPath = cmd.Flag("prereqsPath", "Prerequisites path for sandbox tools").Hidden().String()
 	args.command = cmd.Arg("command", "A command to run, with arguments").Strings()
 	ctx.Register(cmd, do)
 }
@@ -31,15 +35,29 @@ func do(ctx *mansion.Context) {
 }
 
 func Do() error {
-	/* command := *args.command
-	dir := *args.dir */
+	command := *args.command
+	var directory string
+  if (*args.directory != "") {
+    directory = *args.directory
+  } else {
+    directory = filepath.Dir(command[0])
+  }
+  var installPath string
+  if (*args.installPath != "") {
+    installPath = *args.installPath
+  } else {
+    installPath = filepath.Join(directory, "install")
+  }
+  var prereqsPath string
+  if (*args.prereqsPath != "") {
+    prereqsPath = *args.prereqsPath
+  } else {
+    prereqsPath = filepath.Join(directory, "prereqs")
+  }
 
-  dirPath := "/tmp/app"
-  fullTargetPath := "/tmp/app/true"
-  installPath := "/tmp/app/install"
-  var args []string = []string{}
+  fmt.Printf("running %s %s %d", command[0], directory, *args.directory != "")
+
   envBlock := os.Environ()
-  prereqsDir := "/tmp/prereqs"
 	localRuntime := manager.CurrentRuntime()
 
   runParams := &runner.RunnerParams{
@@ -49,16 +67,16 @@ func Do() error {
 
 		Sandbox: true,
 
-		FullTargetPath: fullTargetPath,
+		FullTargetPath: command[0],
 
-		Name:   dirPath,
-		Dir:    dirPath,
-		Args:   args,
+		Name:   directory,
+		Dir:    directory,
+		Args:   command[1:],
 		Env:    envBlock,
 		// Stdout: stdout,
 		// Stderr: stderr,
 
-		PrereqsDir:    prereqsDir,
+		PrereqsDir:    prereqsPath,
 		// Credentials:   params.Credentials,
 		InstallFolder: installPath,
 		Runtime:       localRuntime,
