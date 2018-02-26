@@ -30,14 +30,12 @@ func newSandboxExecRunner(params *RunnerParams) (Runner, error) {
 }
 
 func (ser *sandboxExecRunner) Prepare() error {
-	consumer := ser.params.Consumer
-
 	// make sure we have sandbox-exec
 	{
 		cmd := exec.Command("sandbox-exec", "-n", "no-network", "true")
 		err := cmd.Run()
 		if err != nil {
-			consumer.Warnf("While verifying sandbox-exec: %s", err.Error())
+			fmt.Printf("While verifying sandbox-exec: %s", err.Error())
 			return errors.New("Cannot set up itch.io sandbox, see logs for details")
 		}
 	}
@@ -47,9 +45,8 @@ func (ser *sandboxExecRunner) Prepare() error {
 
 func (ser *sandboxExecRunner) Run() error {
 	params := ser.params
-	consumer := params.Consumer
 
-	consumer.Infof("Creating shim app bundle to enable sandboxing")
+	fmt.Printf("Creating shim app bundle to enable sandboxing")
 	realBundlePath := params.FullTargetPath
 
 	binaryPath, err := macutil.GetExecutablePath(realBundlePath)
@@ -59,7 +56,7 @@ func (ser *sandboxExecRunner) Run() error {
 	binaryName := filepath.Base(binaryPath)
 
 	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.sb")
-	consumer.Opf("Writing sandbox profile to (%s)", sandboxProfilePath)
+	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err = os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
@@ -99,7 +96,7 @@ func (ser *sandboxExecRunner) Run() error {
 		workDir,
 		filepath.Base(realBundlePath),
 	)
-	consumer.Opf("Generating shim bundle as (%s)", shimBundlePath)
+	fmt.Printf("Generating shim bundle as (%s)", shimBundlePath)
 
 	shimBinaryPath := filepath.Join(
 		shimBundlePath,
@@ -143,13 +140,13 @@ func (ser *sandboxExecRunner) Run() error {
 	}
 
 	if investigateSandbox {
-		consumer.Warnf("Wrote shim app to (%s), waiting forever because INVESTIGATE_SANDBOX is set to 1")
+		fmt.Printf("Wrote shim app to (%s), waiting forever because INVESTIGATE_SANDBOX is set to 1")
 		for {
 			time.Sleep(1 * time.Second)
 		}
 	}
 
-	consumer.Statf("All set, hope for the best")
+	fmt.Printf("All set, hope for the best")
 
 	return RunAppBundle(
 		params,

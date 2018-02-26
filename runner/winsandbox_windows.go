@@ -36,15 +36,14 @@ func newWinSandboxRunner(params *RunnerParams) (Runner, error) {
 }
 
 func (wr *winsandboxRunner) Prepare() error {
-	consumer := wr.params.Consumer
 
 	nullConsumer := &state.Consumer{}
 	err := winsandbox.Check(nullConsumer)
 	if err != nil {
-		consumer.Warnf("Sandbox check failed: %s", err.Error())
+		fmt.Printf("Sandbox check failed: %s", err.Error())
 
 		ctx := wr.params.Ctx
-		conn := wr.params.Conn
+		/* conn := wr.params.Conn
 
 		var r buse.AllowSandboxSetupResponse
 		err := conn.Call(ctx, "AllowSandboxSetup", &buse.AllowSandboxSetupParams{}, &r)
@@ -54,11 +53,11 @@ func (wr *winsandboxRunner) Prepare() error {
 
 		if !r.Allow {
 			return operate.ErrAborted
-		}
-		consumer.Infof("Proceeding with sandbox setup...")
+		} */
+		fmt.Printf("Proceeding with sandbox setup...")
 
 		res, err := installer.RunSelf(&installer.RunSelfParams{
-			Consumer: consumer,
+			// Consumer: consumer,
 			Args: []string{
 				"--elevate",
 				"winsandbox",
@@ -80,7 +79,7 @@ func (wr *winsandboxRunner) Prepare() error {
 			return errors.Wrap(err, 0)
 		}
 
-		consumer.Infof("Sandbox setup done, checking again...")
+		fmt.Printf("Sandbox setup done, checking again...")
 		err = winsandbox.Check(nullConsumer)
 		if err != nil {
 			return errors.Wrap(err, 0)
@@ -94,17 +93,16 @@ func (wr *winsandboxRunner) Prepare() error {
 
 	wr.playerData = playerData
 
-	consumer.Infof("Sandbox is ready")
+	fmt.Printf("Sandbox is ready")
 	return nil
 }
 
 func (wr *winsandboxRunner) Run() error {
 	var err error
 	params := wr.params
-	consumer := params.Consumer
 	pd := wr.playerData
 
-	consumer.Infof("Running as user (%s)", pd.Username)
+	fmt.Printf("Running as user (%s)", pd.Username)
 
 	env, err := wr.getEnvironment()
 	if err != nil {
@@ -116,17 +114,17 @@ func (wr *winsandboxRunner) Run() error {
 		return errors.Wrap(err, 0)
 	}
 
-	consumer.Infof("Sharing policy: %s", sp)
+	fmt.Printf("Sharing policy: %s", sp)
 
-	err = sp.Grant(consumer)
+	err = sp.Grant()
 	if err != nil {
 		comm.Warnf(err.Error())
 		comm.Warnf("Attempting launch anyway...")
 	}
 
-	defer sp.Revoke(consumer)
+	defer sp.Revoke()
 
-	err = SetupJobObject(consumer)
+	err = SetupJobObject()
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
@@ -148,7 +146,7 @@ func (wr *winsandboxRunner) Run() error {
 		return errors.Wrap(err, 0)
 	}
 
-	err = WaitJobObject(consumer)
+	err = WaitJobObject()
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
@@ -159,7 +157,6 @@ func (wr *winsandboxRunner) Run() error {
 func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	params := wr.params
 	pd := wr.playerData
-	consumer := params.Consumer
 
 	sp := &winutil.SharingPolicy{
 		Trustee: pd.Username,
@@ -190,7 +187,7 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	// cf. https://github.com/itchio/itch/issues/1470
 	current := filepath.Dir(params.InstallFolder)
 	for i := 0; i < 128; i++ { // dumb failsafe
-		consumer.Debugf("Checking access for (%s)...", current)
+		fmt.Printf("Checking access for (%s)...", current)
 		hasAccess, err := winutil.UserHasPermission(
 			impersonationToken,
 			syscallex.GENERIC_READ,
@@ -201,7 +198,7 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 		}
 
 		if !hasAccess {
-			consumer.Debugf("Will need to grant temporary read permission to (%s)", current)
+			fmt.Printf("Will need to grant temporary read permission to (%s)", current)
 			sp.Entries = append(sp.Entries, &winutil.ShareEntry{
 				Path:        current,
 				Inheritance: winutil.InheritanceModeNone,

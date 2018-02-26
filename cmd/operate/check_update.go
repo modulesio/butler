@@ -65,7 +65,7 @@ func checkUpdateItem(consumer *state.Consumer, item *buse.CheckUpdateItem) (*bus
 	consumer.Statf("Checking for updates to (%s)", GameToString(item.Game))
 	consumer.Statf("Item ID (%s)", item.ItemID)
 	consumer.Infof("→ Cached upload:")
-	LogUpload(consumer, item.Upload, item.Build)
+	LogUpload(item.Upload, item.Build)
 
 	if item.Credentials.DownloadKey > 0 {
 		consumer.Infof("→ Has download key (game is owned)")
@@ -107,7 +107,7 @@ func checkUpdateItem(consumer *state.Consumer, item *buse.CheckUpdateItem) (*bus
 	}
 
 	consumer.Infof("→ Fresh upload:")
-	LogUpload(consumer, freshUpload, freshUpload.Build)
+	LogUpload(freshUpload, freshUpload.Build)
 
 	// non-wharf updates
 	if item.Build == nil {

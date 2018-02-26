@@ -3,6 +3,7 @@
 package runner
 
 import (
+	"ftm"
 	"syscall"
 	"time"
 	"unsafe"
@@ -15,7 +16,7 @@ import (
 var setupDone = false
 var butlerJobObject syscall.Handle
 
-func SetupJobObject(consumer *state.Consumer) error {
+func SetupJobObject() error {
 	if setupDone {
 		return nil
 	}
@@ -49,8 +50,8 @@ func SetupJobObject(consumer *state.Consumer) error {
 
 	err = syscallex.AssignProcessToJobObject(jobObject, currentProcess)
 	if err != nil {
-		consumer.Warnf("No job object support (%s)", err.Error())
-		consumer.Warnf("The 'Running...' indicator and 'Force close' functionality will not work as expected, and ")
+		fmt.Printf("No job object support (%s)", err.Error())
+		fmt.Printf("The 'Running...' indicator and 'Force close' functionality will not work as expected, and ")
 		return nil
 	}
 
@@ -58,7 +59,7 @@ func SetupJobObject(consumer *state.Consumer) error {
 	return nil
 }
 
-func WaitJobObject(consumer *state.Consumer) error {
+func WaitJobObject() error {
 	if butlerJobObject == 0 {
 		return nil
 	}
@@ -93,7 +94,7 @@ func WaitJobObject(consumer *state.Consumer) error {
 
 		if processIdList.NumberOfAssignedProcesses <= 1 {
 			// it's just us left? quit!
-			consumer.Infof("Done waiting for job object after %d rounds", rounds)
+			fmt.Printf("Done waiting for job object after %d rounds", rounds)
 			return nil
 		}
 

@@ -26,14 +26,13 @@ func (sr *simpleRunner) Prepare() error {
 
 func (sr *simpleRunner) Run() error {
 	params := sr.params
-	consumer := params.Consumer
 
-	err := SetupJobObject(consumer)
+	err := SetupJobObject()
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	cmd := exec.CommandContext(params.Ctx, params.FullTargetPath, params.Args...)
+	cmd := exec.Command(params.FullTargetPath, params.Args...)
 	cmd.Dir = params.Dir
 	cmd.Env = params.Env
 	cmd.Stdout = params.Stdout
@@ -44,7 +43,7 @@ func (sr *simpleRunner) Run() error {
 		return errors.Wrap(err, 0)
 	}
 
-	err = WaitJobObject(consumer)
+	err = WaitJobObject()
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}

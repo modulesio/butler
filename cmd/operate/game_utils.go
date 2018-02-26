@@ -84,16 +84,16 @@ func getFilteredUploads(client *itchio.Client, game *itchio.Game, credentials *b
 
 		consumer.Infof("→ Narrowed %d uploads down to %s: ", numInputs, qualif)
 		for _, u := range uploadsFilterResult.Uploads {
-			LogUpload(consumer, u, u.Build)
+			LogUpload(u, u.Build)
 		}
 	}
 
 	return uploadsFilterResult, nil
 }
 
-func LogUpload(consumer *state.Consumer, u *itchio.Upload, b *itchio.Build) {
+func LogUpload(u *itchio.Upload, b *itchio.Build) {
 	if u == nil {
-		consumer.Infof("  No upload")
+		fmt.Printf("  No upload")
 	} else {
 		var name string
 		if u.DisplayName != "" {
@@ -109,7 +109,7 @@ func LogUpload(consumer *state.Consumer, u *itchio.Upload, b *itchio.Build) {
 			size = "Unknown size"
 		}
 
-		consumer.Infof("  ☁ %s :: %s :: #%d", name, size, u.ID)
+		fmt.Printf("  ☁ %s :: %s :: #%d", name, size, u.ID)
 
 		var plats []string
 		if u.Linux {
@@ -130,7 +130,7 @@ func LogUpload(consumer *state.Consumer, u *itchio.Upload, b *itchio.Build) {
 			platString = strings.Join(plats, ", ")
 		}
 
-		consumer.Infof("    %s :: %s", formatUploadType(u.Type), platString)
+		fmt.Printf("    %s :: %s", formatUploadType(u.Type), platString)
 	}
 
 	if b != nil {
@@ -141,7 +141,7 @@ func LogUpload(consumer *state.Consumer, u *itchio.Upload, b *itchio.Build) {
 			version = "No explicit version"
 		}
 
-		consumer.Infof("    Build %d for channel (%s) :: %s :: #%d", b.Version, u.ChannelName, version, b.ID)
+		fmt.Printf("    Build %d for channel (%s) :: %s :: #%d", b.Version, u.ChannelName, version, b.ID)
 	}
 }
 

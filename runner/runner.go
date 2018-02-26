@@ -1,21 +1,21 @@
 package runner
 
 import (
-	"context"
 	"fmt"
 	"io"
 	"runtime"
 
-	"github.com/itchio/butler/buse"
-	"github.com/itchio/butler/cmd/operate"
+	// "github.com/itchio/butler/buse"
+	// "github.com/itchio/butler/cmd/operate"
 	"github.com/itchio/butler/manager"
-	"github.com/itchio/wharf/state"
+	// "github.com/itchio/wharf/state"
+  // "github.com/itchio/butler/mansion"
 )
 
 type RunnerParams struct {
-	Consumer *state.Consumer
-	Conn     operate.Conn
-	Ctx      context.Context
+	// Consumer *state.Consumer
+	// Conn     operate.Conn
+	// Ctx      context.Context
 
 	Sandbox bool
 
@@ -29,7 +29,7 @@ type RunnerParams struct {
 	Stderr io.Writer
 
 	PrereqsDir    string
-	Credentials   *buse.GameCredentials
+	// Credentials   *buse.GameCredentials
 	InstallFolder string
 	Runtime       *manager.Runtime
 }

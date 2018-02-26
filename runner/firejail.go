@@ -31,13 +31,12 @@ func (fr *firejailRunner) Prepare() error {
 
 func (fr *firejailRunner) Run() error {
 	params := fr.params
-	consumer := params.Consumer
 
 	firejailName := fmt.Sprintf("firejail-%s", params.Runtime.Arch())
 	firejailPath := filepath.Join(params.PrereqsDir, firejailName, "firejail")
 
 	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.profile")
-	consumer.Opf("Writing sandbox profile to (%s)", sandboxProfilePath)
+	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err := os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
@@ -49,7 +48,7 @@ func (fr *firejailRunner) Run() error {
 		return errors.Wrap(err, 0)
 	}
 
-	consumer.Opf("Running (%s) through firejail", params.FullTargetPath)
+	fmt.Printf("Running (%s) through firejail", params.FullTargetPath)
 
 	var args []string
 	args = append(args, fmt.Sprintf("--profile=%s", sandboxProfilePath))
@@ -57,7 +56,9 @@ func (fr *firejailRunner) Run() error {
 	args = append(args, params.FullTargetPath)
 	args = append(args, params.Args...)
 
-	cmd := exec.CommandContext(params.Ctx, firejailPath, args...)
+  fmt.Printf("firejail command %s %v", firejailPath, args)
+
+	cmd := exec.Command(firejailPath, args...)
 	cmd.Dir = params.Dir
 	cmd.Env = params.Env
 	cmd.Stdout = params.Stdout

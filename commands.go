@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/itchio/butler/cmd/apply"
+	/* "github.com/itchio/butler/cmd/apply"
 	"github.com/itchio/butler/cmd/apply2"
 	"github.com/itchio/butler/cmd/auditzip"
 	"github.com/itchio/butler/cmd/clean"
@@ -9,26 +9,28 @@ import (
 	"github.com/itchio/butler/cmd/cp"
 	"github.com/itchio/butler/cmd/diff"
 	"github.com/itchio/butler/cmd/ditto"
-	"github.com/itchio/butler/cmd/dl"
+	"github.com/itchio/butler/cmd/dl" */
 	"github.com/itchio/butler/cmd/elevate"
-	"github.com/itchio/butler/cmd/elfprops"
+	/* "github.com/itchio/butler/cmd/elfprops"
 	"github.com/itchio/butler/cmd/exeprops"
 	"github.com/itchio/butler/cmd/extract"
 	"github.com/itchio/butler/cmd/fetch"
 	"github.com/itchio/butler/cmd/file"
 	"github.com/itchio/butler/cmd/heal"
+	"github.com/itchio/butler/cmd/launch"
 	"github.com/itchio/butler/cmd/login"
 	"github.com/itchio/butler/cmd/logout"
 	"github.com/itchio/butler/cmd/ls"
 	"github.com/itchio/butler/cmd/mkdir"
 	"github.com/itchio/butler/cmd/msi"
-	"github.com/itchio/butler/cmd/pipe"
+	"github.com/itchio/butler/cmd/pipe" */
 	"github.com/itchio/butler/cmd/prereqs"
-	"github.com/itchio/butler/cmd/probe"
+	/* "github.com/itchio/butler/cmd/probe"
 	"github.com/itchio/butler/cmd/push"
 	"github.com/itchio/butler/cmd/repack"
-	"github.com/itchio/butler/cmd/run"
-	"github.com/itchio/butler/cmd/service"
+	"github.com/itchio/butler/cmd/run" */
+	"github.com/itchio/butler/cmd/runner"
+	/* "github.com/itchio/butler/cmd/service"
 	"github.com/itchio/butler/cmd/sign"
 	"github.com/itchio/butler/cmd/sizeof"
 	"github.com/itchio/butler/cmd/status"
@@ -39,9 +41,9 @@ import (
 	"github.com/itchio/butler/cmd/verify"
 	"github.com/itchio/butler/cmd/version"
 	"github.com/itchio/butler/cmd/walk"
-	"github.com/itchio/butler/cmd/which"
+	"github.com/itchio/butler/cmd/which" */
 	"github.com/itchio/butler/cmd/winsandbox"
-	"github.com/itchio/butler/cmd/wipe"
+	/* "github.com/itchio/butler/cmd/wipe" */
 	"github.com/itchio/butler/mansion"
 )
 
@@ -50,7 +52,7 @@ import (
 func registerCommands(ctx *mansion.Context) {
 	// documented commands
 
-	login.Register(ctx)
+	/* login.Register(ctx)
 	logout.Register(ctx)
 
 	push.Register(ctx)
@@ -83,10 +85,10 @@ func registerCommands(ctx *mansion.Context) {
 	clean.Register(ctx)
 	walk.Register(ctx)
 
-	msi.Register(ctx)
+	msi.Register(ctx) */
 	prereqs.Register(ctx)
 
-	extract.Register(ctx)
+	/* extract.Register(ctx)
 	unzip.Register(ctx)
 	unsz.Register(ctx)
 	untar.Register(ctx)
@@ -94,18 +96,19 @@ func registerCommands(ctx *mansion.Context) {
 
 	repack.Register(ctx)
 
-	pipe.Register(ctx)
+	pipe.Register(ctx) */
 	elevate.Register(ctx)
-	run.Register(ctx)
+	// run.Register(ctx)
+	runner.Register(ctx)
 
-	exeprops.Register(ctx)
+	/* exeprops.Register(ctx)
 	elfprops.Register(ctx)
 
 	configure.Register(ctx)
 
 	apply2.Register(ctx)
 
-	service.Register(ctx)
+	service.Register(ctx) */
 
 	winsandbox.Register(ctx)
 }

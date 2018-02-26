@@ -2,14 +2,14 @@
 
 package runner
 
-import "github.com/itchio/wharf/state"
+// import "github.com/itchio/wharf/state"
 
-func SetupJobObject(consumer *state.Consumer) error {
+func SetupJobObject() error {
 	// nothing to do
 	return nil
 }
 
-func WaitJobObject(consumer *state.Consumer) error {
+func WaitJobObject() error {
 	// nothing to do
 	return nil
 }

@@ -27,11 +27,6 @@ var ErrNoCandidates = goerrors.New("no candidates")
 var ErrCandidateDisappeared = goerrors.New("candidate disappeared from disk!")
 
 func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err error) {
-	consumer, err := operate.NewStateConsumer(&operate.NewStateConsumerParams{
-		Ctx:     ctx,
-		Conn:    conn,
-		LogFile: nil,
-	})
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
@@ -42,11 +37,11 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 
 	runtime := manager.CurrentRuntime()
 
-	consumer.Infof("→ Launching %s", operate.GameToString(params.Game))
-	consumer.Infof("   on runtime %s", runtime)
-	consumer.Infof("   (%s) is our install folder", params.InstallFolder)
-	consumer.Infof("Passed:")
-	operate.LogUpload(consumer, params.Upload, params.Build)
+	fmt.Printf("→ Launching %s", operate.GameToString(params.Game))
+	fmt.Printf("   on runtime %s", runtime)
+	fmt.Printf("   (%s) is our install folder", params.InstallFolder)
+	fmt.Printf("Passed:")
+	operate.LogUpload(params.Upload, params.Build)
 
 	receiptIn, err := bfs.ReadReceipt(params.InstallFolder)
 	if err != nil {
@@ -72,8 +67,8 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 	}
 
 	if receiptSaidOtherwise {
-		consumer.Warnf("Receipt had different data, switching to:")
-		operate.LogUpload(consumer, params.Upload, params.Build)
+		fmt.Printf("Receipt had different data, switching to:")
+		operate.LogUpload(params.Upload, params.Build)
 	}
 
 	var fullTargetPath string
@@ -90,14 +85,14 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 		var err error
 
 		if appManifest == nil {
-			consumer.Infof("No manifest found at (%s)", manifest.Path(params.InstallFolder))
+			fmt.Printf("No manifest found at (%s)", manifest.Path(params.InstallFolder))
 			return nil
 		}
 
 		actions := appManifest.ListActions(runtime)
 
 		if len(actions) == 0 {
-			consumer.Warnf("Had manifest, but no actions available (for this platform at least)")
+			fmt.Printf("Had manifest, but no actions available (for this platform at least)")
 			return nil
 		}
 
@@ -125,7 +120,7 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 		}
 
 		if manifestAction == nil {
-			consumer.Warnf("No manifest action picked")
+			fmt.Printf("No manifest action picked")
 			return nil
 		}
 
@@ -187,7 +182,7 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 	}
 
 	pickFromVerdict := func() error {
-		consumer.Infof("→ Using verdict: %s", params.Verdict)
+		fmt.Printf("→ Using verdict: %s", params.Verdict)
 
 		switch len(params.Verdict.Candidates) {
 		case 0:
@@ -233,10 +228,10 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 	}
 
 	if fullTargetPath == "" {
-		consumer.Infof("Switching to verdict!")
+		fmt.Printf("Switching to verdict!")
 
 		if params.Verdict == nil {
-			consumer.Infof("No verdict, configuring now")
+			fmt.Printf("No verdict, configuring now")
 
 			verdict, err := configurator.Configure(params.InstallFolder, false)
 			if err != nil {
@@ -270,7 +265,7 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 				}
 
 				if redoReason != "" {
-					consumer.Warnf("%s Re-configuring...", redoReason)
+					fmt.Printf("%s Re-configuring...", redoReason)
 
 					verdict, err := configurator.Configure(params.InstallFolder, false)
 					if err != nil {
@@ -299,14 +294,14 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 	if params.Upload != nil {
 		switch params.Upload.Type {
 		case "soundtrack", "book", "video", "documentation", "mod", "audio_assets", "graphical_assets", "sourcecode":
-			consumer.Infof("Forcing shell strategy because upload is of type (%s)", params.Upload.Type)
+			fmt.Printf("Forcing shell strategy because upload is of type (%s)", params.Upload.Type)
 			fullTargetPath = "."
 			strategy = LaunchStrategyShell
 		}
 	}
 
 	if fullTargetPath == "" {
-		consumer.Warnf("No target from manifest or verdict, falling back to shell strategy")
+	  fmt.Printf("No target from manifest or verdict, falling back to shell strategy")
 		fullTargetPath = "."
 		strategy = LaunchStrategyShell
 	}
@@ -320,8 +315,8 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 		strategy = flavorToStrategy(candidate.Flavor)
 	}
 
-	consumer.Infof("→ Using strategy (%s)", strategy)
-	consumer.Infof("  (%s) is our target", fullTargetPath)
+	fmt.Printf("→ Using strategy (%s)", strategy)
+	fmt.Printf("  (%s) is our target", fullTargetPath)
 
 	launcher := launchers[strategy]
 	if launcher == nil {
@@ -355,7 +350,7 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 				return errors.Wrap(err, 0)
 			}
 
-			consumer.Infof("Got subkey (%d chars, expires %s)", len(res.Key), res.ExpiresAt)
+			fmt.Printf("Got subkey (%d chars, expires %s)", len(res.Key), res.ExpiresAt)
 
 			env["ITCHIO_API_KEY"] = res.Key
 			env["ITCHIO_API_KEY_EXPIRES_AT"] = res.ExpiresAt
@@ -364,14 +359,14 @@ func Do(ctx context.Context, conn operate.Conn, params *buse.LaunchParams) (err 
 
 	sandbox := params.Sandbox
 	if manifestAction != nil && manifestAction.Sandbox {
-		consumer.Infof("Enabling sandbox because of manifest opt-in")
+		fmt.Printf("Enabling sandbox because of manifest opt-in")
 		sandbox = true
 	}
 
 	launcherParams := &LauncherParams{
 		Conn:     conn,
 		Ctx:      ctx,
-		Consumer: consumer,
+		// Consumer: consumer,
 
 		FullTargetPath: fullTargetPath,
 		Candidate:      candidate,
