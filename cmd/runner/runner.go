@@ -46,13 +46,13 @@ func Do() error {
   if (*args.installPath != "") {
     installPath = *args.installPath
   } else {
-    installPath = filepath.Join(directory, "install")
+    installPath = directory
   }
   var prereqsPath string
   if (*args.prereqsPath != "") {
     prereqsPath = *args.prereqsPath
   } else {
-    prereqsPath = filepath.Join(directory, "prereqs")
+    prereqsPath = directory
   }
 
   fmt.Printf("running %s %s %d", command[0], directory, *args.directory != "")

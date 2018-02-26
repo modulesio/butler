@@ -134,50 +134,52 @@ func Check(consumer *state.Consumer) error {
 }
 
 func doSetup(ctx *mansion.Context) {
-	ctx.Must(Setup(comm.NewStateConsumer()))
+	ctx.Must(Setup())
 }
 
-func Setup(consumer *state.Consumer) error {
+func Setup() error {
 	startTime := time.Now()
+  
+  fmt.Printf("Setup")
 
 	nullConsumer := &state.Consumer{}
 
 	err := Check(nullConsumer)
 	if err == nil {
-		consumer.Statf("Already set up properly!")
+		fmt.Printf("Already set up properly!")
 		return nil
 	}
 
 	username := fmt.Sprintf("itch-player-%x", time.Now().Unix())
-	comm.Opf("Generated username (%s)", username)
+  fmt.Printf("Generated username (%s)", username)
 
 	password := generatePassword()
-	comm.Opf("Generated password (%s)", password)
+	fmt.Printf("Generated password (%s)", password)
 
 	comment := "itch.io sandbox user"
 
-	comm.Opf("Adding user...")
+	fmt.Printf("Adding user...")
 
 	err = winutil.AddUser(username, password, comment)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	comm.Opf("Removing from Users group (so it doesn't show up as a login option)...")
+	fmt.Printf("Removing from Users group (so it doesn't show up as a login option)...")
 
 	err = winutil.RemoveUserFromUsersGroup(username)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	comm.Opf("Loading profile for the first time (to create some directories)...")
+	fmt.Printf("Loading profile for the first time (to create some directories)...")
 
 	err = winutil.LoadProfileOnce(username, ".", password)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	comm.Opf("Saving to credentials registry...")
+	fmt.Printf("Saving to credentials registry...")
 
 	pd := &PlayerData{
 		Username: username,
@@ -188,7 +190,7 @@ func Setup(consumer *state.Consumer) error {
 		return errors.Wrap(err, 0)
 	}
 
-	comm.Statf("All done! (in %s)", time.Since(startTime))
+	fmt.Printf("All done! (in %s)", time.Since(startTime))
 
 	return nil
 }
@@ -231,13 +233,13 @@ func Setfilepermissions(consumer *state.Consumer) error {
 	switch *setfilepermissionsArgs.change {
 	case "grant":
 		consumer.Opf("Granting %s", policy)
-		err := policy.Grant(consumer)
+		err := policy.Grant()
 		if err != nil {
 			return errors.Wrap(err, 0)
 		}
 	case "revoke":
 		consumer.Opf("Revoking %s", policy)
-		err := policy.Revoke(consumer)
+		err := policy.Revoke()
 		if err != nil {
 			return errors.Wrap(err, 0)
 		}

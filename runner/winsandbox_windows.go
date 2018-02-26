@@ -1,13 +1,14 @@
 package runner
 
 import (
+	"os"
 	"fmt"
 	"path/filepath"
 	"strings"
 
 	"github.com/modulesio/butler/installer"
 
-	"github.com/modulesio/butler/buse"
+	// "github.com/modulesio/butler/buse"
 	"github.com/modulesio/butler/cmd/elevate"
 	"github.com/modulesio/butler/cmd/operate"
 
@@ -42,8 +43,8 @@ func (wr *winsandboxRunner) Prepare() error {
 	if err != nil {
 		fmt.Printf("Sandbox check failed: %s", err.Error())
 
-		ctx := wr.params.Ctx
-		/* conn := wr.params.Conn
+		/* ctx := wr.params.Ctx
+		conn := wr.params.Conn
 
 		var r buse.AllowSandboxSetupResponse
 		err := conn.Call(ctx, "AllowSandboxSetup", &buse.AllowSandboxSetupParams{}, &r)
@@ -57,7 +58,7 @@ func (wr *winsandboxRunner) Prepare() error {
 		fmt.Printf("Proceeding with sandbox setup...")
 
 		res, err := installer.RunSelf(&installer.RunSelfParams{
-			// Consumer: consumer,
+			Consumer: nullConsumer,
 			Args: []string{
 				"--elevate",
 				"winsandbox",
@@ -92,6 +93,11 @@ func (wr *winsandboxRunner) Prepare() error {
 	}
 
 	wr.playerData = playerData
+  
+  err = os.MkdirAll(wr.params.InstallFolder, 0755)
+	if err != nil {
+		return errors.Wrap(err, 0)
+	}
 
 	fmt.Printf("Sandbox is ready")
 	return nil
@@ -129,7 +135,7 @@ func (wr *winsandboxRunner) Run() error {
 		return errors.Wrap(err, 0)
 	}
 
-	cmd := execas.CommandContext(params.Ctx, params.FullTargetPath, params.Args...)
+	cmd := execas.Command(params.FullTargetPath, params.Args...)
 	cmd.Username = pd.Username
 	cmd.Domain = "."
 	cmd.Password = pd.Password

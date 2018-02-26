@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-errors/errors"
 	"github.com/modulesio/butler/runner/syscallex"
-	"github.com/itchio/wharf/state"
+	// "github.com/itchio/wharf/state"
 )
 
 type PermissionChange int
@@ -265,10 +265,9 @@ type SharingPolicy struct {
 	Entries []*ShareEntry
 }
 
-func (sp *SharingPolicy) Grant(consumer *state.Consumer) error {
+func (sp *SharingPolicy) Grant() error {
 	ec := &errorCoalescer{
 		operation: "granting permissions",
-		consumer:  consumer,
 	}
 	for _, se := range sp.Entries {
 		ec.Record(se.Grant(sp.Trustee))
@@ -276,10 +275,9 @@ func (sp *SharingPolicy) Grant(consumer *state.Consumer) error {
 	return ec.Result()
 }
 
-func (sp *SharingPolicy) Revoke(consumer *state.Consumer) error {
+func (sp *SharingPolicy) Revoke() error {
 	ec := &errorCoalescer{
 		operation: "revoking permissions",
-		consumer:  consumer,
 	}
 	for _, se := range sp.Entries {
 		ec.Record(se.Revoke(sp.Trustee))
@@ -325,7 +323,6 @@ func (sp *SharingPolicy) String() string {
 
 type errorCoalescer struct {
 	operation string
-	consumer  *state.Consumer
 
 	// internal
 	errors []error
@@ -335,9 +332,9 @@ func (ec *errorCoalescer) Record(err error) {
 	if err != nil {
 		ec.errors = append(ec.errors, err)
 		if se, ok := err.(*errors.Error); ok {
-			ec.consumer.Warnf("While %s: %s", ec.operation, se.ErrorStack())
+			fmt.Printf("While %s: %s", ec.operation, se.ErrorStack())
 		} else {
-			ec.consumer.Warnf("While %s: %s", ec.operation, err.Error())
+			fmt.Printf("While %s: %s", ec.operation, err.Error())
 		}
 	}
 }
@@ -389,6 +386,8 @@ func UserHasPermission(impersonationToken syscall.Handle, accessDesired uint32, 
 		0,
 		&securityDescriptorLength,
 	)
+  
+  fmt.Printf("check permission %s", path);
 
 	// allow 0-length allocations
 	securityDescriptor := make([]byte, securityDescriptorLength+1)

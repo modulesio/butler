@@ -18,6 +18,8 @@ import (
 func Elevate(params *ElevateParams) (int, error) {
 	command := params.Command
 
+  fmt.Printf("elevate command %v", command)
+
 	if len(command) <= 0 {
 		return -1, errors.New(`elevate needs a command to run`)
 	}
@@ -60,6 +62,8 @@ func Elevate(params *ElevateParams) (int, error) {
 		return -1, errors.Wrap(err, 0)
 	}
 
+  fmt.Printf("elevation command %s", makeCmdLine(args))
+  
 	err, code := win32.ShellExecuteAndWait(0, "runas", butlerExe, makeCmdLine(args), wd, syscall.SW_HIDE)
 	if err != nil {
 		if strings.Contains(err.Error(), "The operating system denied access to the specified file") {

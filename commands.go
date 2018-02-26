@@ -22,8 +22,8 @@ import (
 	"github.com/modulesio/butler/cmd/logout"
 	"github.com/modulesio/butler/cmd/ls"
 	"github.com/modulesio/butler/cmd/mkdir"
-	"github.com/modulesio/butler/cmd/msi"
-	"github.com/modulesio/butler/cmd/pipe" */
+	"github.com/modulesio/butler/cmd/msi" */
+	"github.com/modulesio/butler/cmd/pipe"
 	"github.com/modulesio/butler/cmd/prereqs"
 	/* "github.com/modulesio/butler/cmd/probe"
 	"github.com/modulesio/butler/cmd/push"
@@ -94,9 +94,9 @@ func registerCommands(ctx *mansion.Context) {
 	untar.Register(ctx)
 	auditzip.Register(ctx)
 
-	repack.Register(ctx)
+	repack.Register(ctx) */
 
-	pipe.Register(ctx) */
+	pipe.Register(ctx)
 	elevate.Register(ctx)
 	// run.Register(ctx)
 	runner.Register(ctx)

@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-errors/errors"
 	"github.com/modulesio/butler/runner/syscallex"
-	"github.com/itchio/wharf/state"
+	// "github.com/itchio/wharf/state"
 )
 
 var setupDone = false
