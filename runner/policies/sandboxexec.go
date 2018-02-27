@@ -10,24 +10,10 @@ const SandboxExecTemplate = `
 (deny default)
 
 (allow file*
-  (subpath "{{USER_LIBRARY}}/Application Support")
-  (subpath "{{USER_LIBRARY}}/Preferences")
-  (subpath "{{USER_LIBRARY}}/Logs")
-  (subpath "{{USER_LIBRARY}}/Caches")
-  (subpath "{{USER_LIBRARY}}/KeyBindings")
-  (subpath "{{USER_LIBRARY}}/Saved Application State")
-
   ;; FIXME probably a bit much ?
   (subpath "/dev")
   (subpath "/private/var/folders")
   (subpath "/var/folders" )
-)
-
-(deny file*
-  (subpath "{{USER_LIBRARY}}/Application Support/itch")
-  (subpath "{{USER_LIBRARY}}/Application Support/kitch")
-  (subpath "{{USER_LIBRARY}}/Application Support/Google")
-  (subpath "{{USER_LIBRARY}}/Application Support/Mozilla")
 )
 
 (allow file*
