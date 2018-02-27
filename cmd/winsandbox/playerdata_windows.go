@@ -48,7 +48,7 @@ func (pd *PlayerData) Save() error {
 
 // registry utilities
 
-const itchPlayerRegistryKey = `SOFTWARE\itch\Sandbox`
+const itchPlayerRegistryKey = `SOFTWARE\isolator\sandbox`
 
 func getItchPlayerData(name string) (string, error) {
 	key, _, err := registry.CreateKey(registry.CURRENT_USER, itchPlayerRegistryKey, registry.READ)

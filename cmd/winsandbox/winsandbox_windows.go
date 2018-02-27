@@ -1,7 +1,7 @@
 // +build windows
 
 // This package implements a sandbox for Windows. It works by
-// creating a less-privileged user, `itch-player-XXXXX`, which
+// creating a less-privileged user, `isolator-user-XXXXX`, which
 // we hide from login and share a game's folder before we launch
 // it (then unshare it immediately after).
 //
@@ -150,7 +150,7 @@ func Setup() error {
 		return nil
 	}
 
-	username := fmt.Sprintf("itch-player-%x", time.Now().Unix())
+	username := fmt.Sprintf("isolator-user-%x", time.Now().Unix())
   fmt.Printf("Generated username (%s)", username)
 
 	password := generatePassword()
