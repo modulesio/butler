@@ -66,7 +66,13 @@ func Do(ctx *mansion.Context) error {
   }
 
   installPath := filepath.Dir(command[0])
+  installPath, err = filepath.Abs(installPath)
+  if err != nil {
+    return errors.Wrap(err, 0)
+  }
+
   name := filepath.Base(command[0])
+
 	var directory string
   if (*args.directory != "") {
     directory = *args.directory
