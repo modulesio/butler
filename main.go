@@ -37,7 +37,7 @@ var (
 	butlerBuiltAt       = ""     // set by command-line on CI release builds
 	butlerCommit        = ""     // set by command-line on CI release builds
 	butlerVersionString = ""     // formatted on boot from 'version' and 'builtAt'
-	app                 = kingpin.New("butler", "Your happy little itch.io helper")
+	app                 = kingpin.New("isolator", "Lightweight process isolation")
 
 	// scriptCmd = app.Command("script", "Run a series of butler commands").Hidden()
 )
@@ -136,7 +136,6 @@ func doMain(args []string) {
 	buildVersionString()
 	app.Version(butlerVersionString)
 	app.VersionFlag.Short('V')
-	app.Author("Amos Wenger <amos@itch.io>")
 
 	cmd, err := app.Parse(args)
 	if err != nil {
