@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+	"syscall"
 
 	"github.com/go-errors/errors"
 	// "github.com/modulesio/butler/runner/macutil"
@@ -32,11 +33,16 @@ func newSandboxExecRunner(params *RunnerParams) (Runner, error) {
 func (ser *sandboxExecRunner) Prepare() error {
 	// make sure we have sandbox-exec
 	{
-		cmd := exec.Command("sandbox-exec", "-n", "no-network", "true")
+		cmd := exec.Command("sandbox-exec")
 		err := cmd.Run()
 		if err != nil {
-			fmt.Printf("While verifying sandbox-exec: %s", err.Error())
-			return errors.New("Cannot set up isolator sandbox, see logs for details")
+			exitErr := err.(*exec.ExitError)
+			waitStatus := exitErr.Sys().(syscall.WaitStatus)
+			exitStatus := waitStatus.ExitStatus()
+			if (exitStatus != 64) {
+				// fmt.Printf("While verifying sandbox-exec: %v", exitStatus)
+				return errors.New("Cannot run sandbox-exec")
+		  }
 		}
 	}
 
