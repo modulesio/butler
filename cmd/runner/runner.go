@@ -78,6 +78,10 @@ func Do(ctx *mansion.Context) error {
 
   fmt.Printf("running %s %s %d", command[0])
 
+  env := os.Environ()
+  nodeReplHistory := "NODE_REPL_HISTORY=" + filepath.Join(directory, ".isolator", ".node_repl_history")
+  env = append(env, nodeReplHistory)
+
   runParams := &runner.RunnerParams{
 		// Consumer: consumer,
 		// Conn:     conn,
@@ -90,7 +94,7 @@ func Do(ctx *mansion.Context) error {
 		Name:   name,
 		Dir:    directory,
 		Args:   command[1:],
-		Env:    os.Environ(),
+		Env:    env,
 		Stdin: os.Stdin,
 		Stdout: os.Stdout,
 		Stderr: os.Stderr,
