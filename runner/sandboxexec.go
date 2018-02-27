@@ -56,7 +56,7 @@ func (ser *sandboxExecRunner) Run() error {
 	} */
 	// binaryName := filepath.Base(binaryPath)
 
-	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.sb")
+	sandboxProfilePath := filepath.Join(params.Dir, ".isolator", "isolate-app.sb")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err := os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {

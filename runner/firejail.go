@@ -91,7 +91,7 @@ func (fr *firejailRunner) Run() error {
 
   firejailPath := filepath.Join(filepath.Dir(executable), "bin", "firejail")
 
-	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.profile")
+	sandboxProfilePath := filepath.Join(params.Dir, ".isolator", "isolate-app.profile")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err = os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
