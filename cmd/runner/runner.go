@@ -2,6 +2,7 @@ package runner
 
 import (
 	"fmt"
+	"regexp"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -22,20 +23,38 @@ var args = struct {
 }{}
 
 func Register(ctx *mansion.Context) {
-	cmd := ctx.App.Command("runner", "Runs a command").Hidden()
-	args.directory = cmd.Flag("directory", "The working directory for the command").Hidden().String()
-  args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").Hidden().String()
+	cmd := ctx.App.Command("runner", "Runs a command").Default()
+	args.directory = cmd.Flag("directory", "The working directory for the command").String()
+  args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").String()
   // args.prereqsPath = cmd.Flag("prereqsPath", "Prerequisites path for sandbox tools").Hidden().String()
 	args.command = cmd.Arg("command", "A command to run, with arguments").Strings()
 	ctx.Register(cmd, do)
 }
 
 func do(ctx *mansion.Context) {
-	ctx.Must(Do())
+	ctx.Must(Do(ctx))
 }
 
-func Do() error {
+func Do(ctx *mansion.Context) error {
 	command := *args.command
+
+  var matched bool
+  if (len(command) > 0) {
+    r, err := regexp.Compile("^(?:/|\\.|[a-zA-Z]:\\\\)")
+    if err != nil {
+      return errors.Wrap(err, 0)
+    }
+
+    matched = r.MatchString(command[0])
+  } else {
+    matched = false
+  }
+  if (!matched) {
+    var args []string;
+    ctx.App.Usage(args);
+    return nil;
+  }
+
 	var directory string
   if (*args.directory != "") {
     directory = *args.directory
