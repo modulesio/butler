@@ -25,10 +25,11 @@ type RunnerParams struct {
 	Dir    string
 	Args   []string
 	Env    []string
+	Stdin io.Reader
 	Stdout io.Writer
 	Stderr io.Writer
 
-	PrereqsDir    string
+	// PrereqsDir    string
 	// Credentials   *buse.GameCredentials
 	InstallFolder string
 	Runtime       *manager.Runtime

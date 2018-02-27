@@ -89,8 +89,6 @@ func (fr *firejailRunner) Run() error {
     return errors.Wrap(err, 0)
   }
 
-	// firejailName := fmt.Sprintf("firejail-%s", params.Runtime.Arch())
-	// firejailPath := filepath.Join(params.PrereqsDir, /*firejailName,*/ "firejail")
   firejailPath := filepath.Join(filepath.Dir(executable), "bin", "firejail")
 
 	sandboxProfilePath := filepath.Join(params.InstallFolder, ".itch", "isolate-app.profile")
@@ -114,11 +112,12 @@ func (fr *firejailRunner) Run() error {
 	args = append(args, params.FullTargetPath)
 	args = append(args, params.Args...)
 
-  fmt.Printf("firejail command %s %v", firejailPath, args)
+  fmt.Printf("firejail command %s %v %v %v", firejailPath, args, params.Stdout, params.Stderr)
 
 	cmd := exec.Command(firejailPath, args...)
 	cmd.Dir = params.Dir
 	cmd.Env = params.Env
+	cmd.Stdin = params.Stdin
 	cmd.Stdout = params.Stdout
 	cmd.Stderr = params.Stderr
 

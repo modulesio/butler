@@ -121,7 +121,7 @@ func (l *Launcher) Do(params *launch.LauncherParams) error {
 		Stdout: stdout,
 		Stderr: stderr,
 
-		PrereqsDir:    params.PrereqsDir,
+		// PrereqsDir:    params.PrereqsDir,
 		// Credentials:   params.Credentials,
 		InstallFolder: params.InstallFolder,
 		Runtime:       params.Runtime,

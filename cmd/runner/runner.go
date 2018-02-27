@@ -17,7 +17,7 @@ import (
 var args = struct {
 	directory     *string
   installPath     *string
-  prereqsPath     *string
+  // prereqsPath     *string
 	command *[]string
 }{}
 
@@ -25,7 +25,7 @@ func Register(ctx *mansion.Context) {
 	cmd := ctx.App.Command("runner", "Runs a command").Hidden()
 	args.directory = cmd.Flag("directory", "The working directory for the command").Hidden().String()
   args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").Hidden().String()
-  args.prereqsPath = cmd.Flag("prereqsPath", "Prerequisites path for sandbox tools").Hidden().String()
+  // args.prereqsPath = cmd.Flag("prereqsPath", "Prerequisites path for sandbox tools").Hidden().String()
 	args.command = cmd.Arg("command", "A command to run, with arguments").Strings()
 	ctx.Register(cmd, do)
 }
@@ -48,17 +48,14 @@ func Do() error {
   } else {
     installPath = directory
   }
-  var prereqsPath string
+  /* var prereqsPath string
   if (*args.prereqsPath != "") {
     prereqsPath = *args.prereqsPath
   } else {
     prereqsPath = directory
-  }
+  } */
 
   fmt.Printf("running %s %s %d", command[0], directory, *args.directory != "")
-
-  envBlock := os.Environ()
-	localRuntime := manager.CurrentRuntime()
 
   runParams := &runner.RunnerParams{
 		// Consumer: consumer,
@@ -72,14 +69,15 @@ func Do() error {
 		Name:   directory,
 		Dir:    directory,
 		Args:   command[1:],
-		Env:    envBlock,
-		// Stdout: stdout,
-		// Stderr: stderr,
+		Env:    os.Environ(),
+		Stdin: os.Stdin,
+		Stdout: os.Stdout,
+		Stderr: os.Stderr,
 
-		PrereqsDir:    prereqsPath,
+		// PrereqsDir:    prereqsPath,
 		// Credentials:   params.Credentials,
 		InstallFolder: installPath,
-		Runtime:       localRuntime,
+		Runtime:       manager.CurrentRuntime(),
 	}
 
   run, err := runner.GetRunner(runParams)
