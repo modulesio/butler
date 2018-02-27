@@ -39,7 +39,7 @@ var (
 	butlerVersionString = ""     // formatted on boot from 'version' and 'builtAt'
 	app                 = kingpin.New("butler", "Your happy little itch.io helper")
 
-	scriptCmd = app.Command("script", "Run a series of butler commands").Hidden()
+	// scriptCmd = app.Command("script", "Run a series of butler commands").Hidden()
 )
 
 var appArgs = struct {
@@ -86,11 +86,11 @@ var appArgs = struct {
 	app.Flag("throttle", "Use less than 'throttle' Kbps (kilobits per second) of bandwidth").Hidden().Default("-1").Int64(),
 }
 
-var scriptArgs = struct {
+/* var scriptArgs = struct {
 	file *string
 }{
 	scriptCmd.Arg("file", "File containing a list of butler commands, one per line, with 'butler' omitted").Required().String(),
-}
+} */
 
 func defaultKeyPath() string {
 	configPath := os.Getenv("XDG_CONFIG_PATH")
@@ -228,8 +228,8 @@ func doMain(args []string) {
 	ctx.CompressionQuality = *appArgs.compressionQuality
 
 	switch fullCmd {
-	case scriptCmd.FullCommand():
-		script(ctx, *scriptArgs.file)
+	/* case scriptCmd.FullCommand():
+		script(ctx, *scriptArgs.file) */
 
 	default:
 		do := ctx.Commands[fullCmd]
