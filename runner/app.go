@@ -4,7 +4,6 @@ import (
 	"os"
 	"fmt"
 	"os/exec"
-	"os/signal"
 
 	"github.com/go-errors/errors"
 	// "github.com/modulesio/butler/runner/macutil"
@@ -41,43 +40,16 @@ func RunAppBundle(params *RunnerParams, binPath string) error {
 	fmt.Printf("Actual binary is (%s) %v", binPath, params.Args)
 
 	cmd := exec.Command(binPath, params.Args...)
+	cmd.Stdin = os.Stdin
+  cmd.Stdout = os.Stdout
+  cmd.Stderr = os.Stderr
 	// I doubt this matters
 	cmd.Dir = params.Dir
 	cmd.Env = params.Env
 	// 'open' does not relay stdout or stderr, so we don't
 	// even bother setting them
 
-	processDone := make(chan struct{})
-
-	go func() {
-		// catch SIGINT and kill the child if needed
-		c := make(chan os.Signal, 1)
-		signal.Notify(c, os.Interrupt)
-
-		fmt.Printf("Signal handler installed...")
-
-		// Block until a signal is received.
-		select {
-		/* case <-params.Ctx.Done():
-			fmt.Printf("Context done!") */
-		case s := <-c:
-			fmt.Printf("Got signal: %v", s)
-		case <-processDone:
-			return
-		}
-
-		fmt.Printf("Killing app...")
-		// TODO: kill the actual binary, not the app
-		cmd := exec.Command("pkill", "-f", binPath)
-		err := cmd.Run()
-		if err != nil {
-			fmt.Printf("While killing: %s", err.Error())
-		}
-		os.Exit(0)
-	}()
-
 	err := cmd.Run()
-	close(processDone)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
