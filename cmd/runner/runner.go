@@ -76,11 +76,18 @@ func Do(ctx *mansion.Context) error {
     prereqsPath = directory
   } */
 
+  executable, err := os.Executable()
+  if err != nil {
+    return errors.Wrap(err, 0)
+  }
+
   fmt.Printf("running %s %s %d", command[0])
 
   env := os.Environ()
   nodeReplHistory := "NODE_REPL_HISTORY=" + filepath.Join(directory, ".isolator", ".node_repl_history")
   env = append(env, nodeReplHistory)
+  libDir := "LIBDIR=" + filepath.Join(filepath.Dir(executable))
+  env = append(env, libDir)
 
   runParams := &runner.RunnerParams{
 		// Consumer: consumer,
