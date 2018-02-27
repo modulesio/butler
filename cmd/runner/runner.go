@@ -40,7 +40,7 @@ func Do(ctx *mansion.Context) error {
 
   var matched bool
   if (len(command) > 0) {
-    r, err := regexp.Compile("^(?:/|\\.|[a-zA-Z]:\\\\)")
+    r, err := regexp.Compile("^(?:/|\\.\\/|\\.\\.\\/|[a-zA-Z]:\\\\)")
     if err != nil {
       return errors.Wrap(err, 0)
     }
