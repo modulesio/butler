@@ -1,7 +1,7 @@
 package policies
 
 // This templates generates a sandbox policy file suitable for
-// running relatively-untrusted apps via itch.
+// running relatively-untrusted apps.
 //
 // Reference:
 // https://reverse.put.as/wp-content/uploads/2011/09/Apple-Sandbox-Guide-v1.0.pdf
