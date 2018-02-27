@@ -1,7 +1,7 @@
 package runner
 
 import (
-	"os"
+	// "os"
 	"fmt"
 	"path/filepath"
 	"strings"
@@ -218,7 +218,7 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 		current = next
 	}
 
-  // InstallFolder
+  /* // InstallFolder
 	hasAccess, err = winutil.UserHasPermission(
 		impersonationToken,
 		syscallex.GENERIC_ALL,
@@ -235,7 +235,7 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 		})
 	}
 	// cf. https://github.com/itchio/itch/issues/1470
-	current := filepath.Dir(params.InstallFolder)
+	current = filepath.Dir(params.InstallFolder)
 	for i := 0; i < 128; i++ { // dumb failsafe
 		fmt.Printf("Checking access for (%s)...", current)
 		hasAccess, err := winutil.UserHasPermission(
@@ -260,7 +260,7 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 			break
 		}
 		current = next
-	}
+	} */
 
 	return sp, nil
 }
