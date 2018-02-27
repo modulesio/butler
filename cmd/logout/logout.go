@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/mansion"
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/mansion"
+	"github.com/modulesio/isolator/comm"
 )
 
 func Register(ctx *mansion.Context) {

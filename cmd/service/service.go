@@ -7,15 +7,15 @@ import (
 	"log"
 	"net"
 
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/cmd/launch"
-	"github.com/modulesio/butler/cmd/operate"
-	"github.com/modulesio/butler/cmd/operate/harness"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/cmd/launch"
+	"github.com/modulesio/isolator/cmd/operate"
+	"github.com/modulesio/isolator/cmd/operate/harness"
 	"github.com/sourcegraph/jsonrpc2"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 )
 
 func Register(ctx *mansion.Context) {

@@ -1,7 +1,7 @@
 package harness
 
 import (
-	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/isolator/buse"
 	itchio "github.com/itchio/go-itchio"
 )
 

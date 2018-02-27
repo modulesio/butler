@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 )
 
 var args = struct {

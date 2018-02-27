@@ -4,8 +4,8 @@ import (
 	"path/filepath"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/configurator"
-	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/isolator/configurator"
+	"github.com/modulesio/isolator/installer"
 )
 
 func (m *Manager) Uninstall(params *installer.UninstallParams) error {

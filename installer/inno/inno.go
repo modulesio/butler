@@ -1,6 +1,6 @@
 package inno
 
-import "github.com/modulesio/butler/installer"
+import "github.com/modulesio/isolator/installer"
 
 type Manager struct {
 }

@@ -14,8 +14,8 @@ import (
 	"strings"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/art"
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/art"
+	"github.com/modulesio/isolator/comm"
 	"github.com/itchio/go-itchio"
 )
 

@@ -6,11 +6,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/isolator/cmd/operate"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/installer"
-	"github.com/modulesio/butler/installer/bfs"
+	"github.com/modulesio/isolator/installer"
+	"github.com/modulesio/isolator/installer/bfs"
 )
 
 /*

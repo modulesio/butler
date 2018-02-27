@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/modulesio/butler/pb"
-	"github.com/modulesio/butler/progress"
+	"github.com/modulesio/isolator/pb"
+	"github.com/modulesio/isolator/progress"
 	"github.com/itchio/wharf/state"
 )
 

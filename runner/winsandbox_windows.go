@@ -6,18 +6,18 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/isolator/installer"
 
-	// "github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/cmd/elevate"
-	"github.com/modulesio/butler/cmd/operate"
+	// "github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/cmd/elevate"
+	"github.com/modulesio/isolator/cmd/operate"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/winsandbox"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/runner/execas"
-	"github.com/modulesio/butler/runner/syscallex"
-	"github.com/modulesio/butler/runner/winutil"
+	"github.com/modulesio/isolator/cmd/winsandbox"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/runner/execas"
+	"github.com/modulesio/isolator/runner/syscallex"
+	"github.com/modulesio/isolator/runner/winutil"
 	"github.com/itchio/wharf/state"
 )
 

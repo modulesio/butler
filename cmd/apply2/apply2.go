@@ -7,8 +7,8 @@ import (
 
 	"github.com/dchest/safefile"
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 	"github.com/itchio/savior/seeksource"
 	"github.com/itchio/wharf/pools/fspool"
 	"github.com/itchio/wharf/eos"

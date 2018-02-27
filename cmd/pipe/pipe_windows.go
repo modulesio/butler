@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/mansion"
 	"github.com/natefinch/npipe"
 )
 

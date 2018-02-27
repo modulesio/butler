@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/modulesio/butler/archive/szextractor"
+	"github.com/modulesio/isolator/archive/szextractor"
 	"github.com/itchio/savior"
 	"github.com/itchio/savior/checker"
 	"github.com/itchio/wharf/eos"

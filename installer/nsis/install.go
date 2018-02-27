@@ -2,9 +2,9 @@ package nsis
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/installer/bfs"
+	"github.com/modulesio/isolator/installer/bfs"
 
-	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/isolator/installer"
 )
 
 /*

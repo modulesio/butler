@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/modulesio/butler/art"
+	"github.com/modulesio/isolator/art"
 	"github.com/itchio/wharf/state"
 	"github.com/olekukonko/tablewriter"
 	"github.com/skratchdot/open-golang/open"

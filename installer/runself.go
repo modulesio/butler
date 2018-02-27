@@ -10,7 +10,7 @@ import (
 	"syscall"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/installer/loggerwriter"
+	"github.com/modulesio/isolator/installer/loggerwriter"
 	"github.com/itchio/wharf/state"
 )
 

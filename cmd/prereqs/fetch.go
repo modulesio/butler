@@ -4,11 +4,11 @@ import (
 	"context"
 	"io/ioutil"
 
-	"github.com/modulesio/butler/cmd/operate"
-	"github.com/modulesio/butler/cmd/operate/loopbackconn"
+	"github.com/modulesio/isolator/cmd/operate"
+	"github.com/modulesio/isolator/cmd/operate/loopbackconn"
 	itchio "github.com/itchio/go-itchio"
 
-	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/isolator/buse"
 
 	"github.com/go-errors/errors"
 )

@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/manager"
-	"github.com/modulesio/butler/redist"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/manager"
+	"github.com/modulesio/isolator/redist"
 	"github.com/itchio/wharf/eos"
 	"github.com/itchio/wharf/state"
 )

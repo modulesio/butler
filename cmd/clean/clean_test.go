@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/clean"
+	"github.com/modulesio/isolator/cmd/clean"
 	"github.com/itchio/wharf/wtest"
 	"github.com/stretchr/testify/assert"
 )

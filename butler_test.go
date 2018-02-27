@@ -17,11 +17,11 @@ import (
 	"github.com/itchio/savior/seeksource"
 	"github.com/itchio/wharf/eos"
 	"github.com/itchio/wharf/pwr"
-	"github.com/modulesio/butler/cmd/apply"
-	"github.com/modulesio/butler/cmd/diff"
-	"github.com/modulesio/butler/cmd/ditto"
-	"github.com/modulesio/butler/cmd/sign"
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/cmd/apply"
+	"github.com/modulesio/isolator/cmd/diff"
+	"github.com/modulesio/isolator/cmd/ditto"
+	"github.com/modulesio/isolator/cmd/sign"
+	"github.com/modulesio/isolator/comm"
 	"github.com/stretchr/testify/assert"
 )
 

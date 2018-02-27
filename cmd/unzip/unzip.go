@@ -5,8 +5,8 @@ import (
 
 	humanize "github.com/dustin/go-humanize"
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 	"github.com/itchio/wharf/archiver"
 	"github.com/itchio/wharf/eos"
 )

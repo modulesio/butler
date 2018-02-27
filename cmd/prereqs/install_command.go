@@ -9,15 +9,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/modulesio/butler/redist"
+	"github.com/modulesio/isolator/redist"
 
-	"github.com/modulesio/butler/manager"
+	"github.com/modulesio/isolator/manager"
 	"github.com/itchio/wharf/state"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/msi"
-	"github.com/modulesio/butler/installer"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/cmd/msi"
+	"github.com/modulesio/isolator/installer"
+	"github.com/modulesio/isolator/mansion"
 )
 
 func Install(ctx *mansion.Context, planPath string, pipePath string) error {

@@ -2,8 +2,8 @@ package mockharness
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/cmd/operate/harness"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/cmd/operate/harness"
 	itchio "github.com/itchio/go-itchio"
 	httpmock "gopkg.in/jarcoal/httpmock.v1"
 )

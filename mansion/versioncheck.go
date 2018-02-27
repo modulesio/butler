@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/blang/semver"
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/comm"
 	itchio "github.com/itchio/go-itchio"
 )
 

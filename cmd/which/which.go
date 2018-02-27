@@ -1,8 +1,8 @@
 package which
 
 import (
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 	"github.com/kardianos/osext"
 )
 

@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 	itchio "github.com/itchio/go-itchio"
 	"github.com/itchio/wharf/archiver"
 	"github.com/itchio/wharf/eos"

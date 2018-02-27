@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/isolator/buse"
 	itchio "github.com/itchio/go-itchio"
 	"github.com/itchio/wharf/state"
 )

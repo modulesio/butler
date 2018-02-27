@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/cmd/operate"
 	itchio "github.com/itchio/go-itchio"
 )
 

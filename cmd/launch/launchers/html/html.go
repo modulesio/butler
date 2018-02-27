@@ -4,8 +4,8 @@ import (
 	"path/filepath"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/cmd/launch"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/cmd/launch"
 )
 
 func Register() {

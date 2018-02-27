@@ -9,18 +9,18 @@ import (
 	"strings"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/modulesio/butler/configurator"
-	"github.com/modulesio/butler/installer/bfs"
-	"github.com/modulesio/butler/manager"
+	"github.com/modulesio/isolator/configurator"
+	"github.com/modulesio/isolator/installer/bfs"
+	"github.com/modulesio/isolator/manager"
 	itchio "github.com/itchio/go-itchio"
 
 	goerrors "errors"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/launch/manifest"
-	"github.com/modulesio/butler/cmd/operate"
+	"github.com/modulesio/isolator/cmd/launch/manifest"
+	"github.com/modulesio/isolator/cmd/operate"
 
-	"github.com/modulesio/butler/buse"
+	"github.com/modulesio/isolator/buse"
 )
 
 var ErrNoCandidates = goerrors.New("no candidates")

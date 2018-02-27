@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/configurator"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/configurator"
+	"github.com/modulesio/isolator/mansion"
 )
 
 var args = struct {

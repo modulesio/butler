@@ -11,8 +11,8 @@ import (
 	"syscall"
 
 	"github.com/go-errors/errors"
-	// "github.com/modulesio/butler/runner/macutil"
-	"github.com/modulesio/butler/runner/policies"
+	// "github.com/modulesio/isolator/runner/macutil"
+	"github.com/modulesio/isolator/runner/policies"
 )
 
 var investigateSandbox = os.Getenv("INVESTIGATE_SANDBOX") == "1"

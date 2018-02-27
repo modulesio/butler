@@ -1,7 +1,7 @@
 package pipe
 
 import (
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/mansion"
 )
 
 var args = struct {

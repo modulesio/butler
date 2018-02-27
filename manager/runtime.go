@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/comm"
 	itchio "github.com/itchio/go-itchio"
 )
 

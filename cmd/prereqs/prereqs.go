@@ -1,9 +1,9 @@
 package prereqs
 
 import (
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/mansion"
-	"github.com/modulesio/butler/redist"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/mansion"
+	"github.com/modulesio/isolator/redist"
 )
 
 var installArgs = struct {

@@ -9,11 +9,11 @@ import (
 	"github.com/itchio/go-itchio"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/installer/bfs"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/installer/bfs"
 	"github.com/itchio/wharf/eos"
 
-	"github.com/modulesio/butler/installer"
+	"github.com/modulesio/isolator/installer"
 
 	"github.com/go-errors/errors"
 )

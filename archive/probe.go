@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/modulesio/butler/archive/szextractor"
+	"github.com/modulesio/isolator/archive/szextractor"
 	"github.com/itchio/savior/bzip2source"
 	"github.com/itchio/savior/gzipsource"
 	"github.com/itchio/savior/seeksource"

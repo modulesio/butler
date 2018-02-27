@@ -6,7 +6,7 @@ import (
 
 	humanize "github.com/dustin/go-humanize"
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/dl"
+	"github.com/modulesio/isolator/cmd/dl"
 	"github.com/itchio/httpkit/httpfile"
 	"github.com/itchio/savior"
 	"github.com/itchio/savior/seeksource"

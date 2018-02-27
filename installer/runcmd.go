@@ -7,8 +7,8 @@ import (
 	"syscall"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/elevate"
-	"github.com/modulesio/butler/installer/loggerwriter"
+	"github.com/modulesio/isolator/cmd/elevate"
+	"github.com/modulesio/isolator/installer/loggerwriter"
 	"github.com/itchio/wharf/state"
 )
 

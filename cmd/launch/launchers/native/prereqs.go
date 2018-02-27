@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/modulesio/butler/manager"
+	"github.com/modulesio/isolator/manager"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/buse"
-	"github.com/modulesio/butler/cmd/launch"
-	"github.com/modulesio/butler/cmd/prereqs"
+	"github.com/modulesio/isolator/buse"
+	"github.com/modulesio/isolator/cmd/launch"
+	"github.com/modulesio/isolator/cmd/prereqs"
 )
 
 func handlePrereqs(params *launch.LauncherParams) error {

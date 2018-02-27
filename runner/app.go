@@ -6,7 +6,7 @@ import (
 	"os/exec"
 
 	"github.com/go-errors/errors"
-	// "github.com/modulesio/butler/runner/macutil"
+	// "github.com/modulesio/isolator/runner/macutil"
 )
 
 type appRunner struct {

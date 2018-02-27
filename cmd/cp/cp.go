@@ -8,9 +8,9 @@ import (
 
 	humanize "github.com/dustin/go-humanize"
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/cmd/dl"
-	"github.com/modulesio/butler/comm"
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/cmd/dl"
+	"github.com/modulesio/isolator/comm"
+	"github.com/modulesio/isolator/mansion"
 	"github.com/itchio/httpkit/httpfile"
 	"github.com/itchio/httpkit/retrycontext"
 	"github.com/itchio/wharf/counter"

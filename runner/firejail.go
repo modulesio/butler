@@ -9,11 +9,11 @@ import (
 
 	"github.com/go-errors/errors"
   "github.com/itchio/wharf/state"
-	"github.com/modulesio/butler/cmd/elevate"
-	"github.com/modulesio/butler/cmd/operate"
-  "github.com/modulesio/butler/installer"
-	// "github.com/modulesio/butler/runner/policies"
-	"github.com/modulesio/butler/cmd/linuxsandbox"
+	"github.com/modulesio/isolator/cmd/elevate"
+	"github.com/modulesio/isolator/cmd/operate"
+  "github.com/modulesio/isolator/installer"
+	// "github.com/modulesio/isolator/runner/policies"
+	"github.com/modulesio/isolator/cmd/linuxsandbox"
 )
 
 type firejailRunner struct {

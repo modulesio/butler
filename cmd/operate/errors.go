@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/comm"
 )
 
 type OperationError struct {

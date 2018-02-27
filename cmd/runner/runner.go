@@ -10,9 +10,9 @@ import (
 	"runtime"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/mansion"
-	"github.com/modulesio/butler/manager"
-	"github.com/modulesio/butler/runner"
+	"github.com/modulesio/isolator/mansion"
+	"github.com/modulesio/isolator/manager"
+	"github.com/modulesio/isolator/runner"
 )
 
 var args = struct {

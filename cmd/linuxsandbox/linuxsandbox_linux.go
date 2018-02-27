@@ -16,13 +16,13 @@ import (
 	"path/filepath"
 	// "time"
 
-	// "github.com/modulesio/butler/runner/syscallex"
+	// "github.com/modulesio/isolator/runner/syscallex"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/comm"
+	"github.com/modulesio/isolator/comm"
 	"github.com/itchio/wharf/state"
 
-	"github.com/modulesio/butler/mansion"
+	"github.com/modulesio/isolator/mansion"
 )
 
 func Register(ctx *mansion.Context) {
