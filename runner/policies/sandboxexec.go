@@ -20,6 +20,7 @@ const SandboxExecTemplate = `
   ;; where the app is actually installed
   ;; note: the app won't be able to scan/access apps from other locations
   (subpath "{{INSTALL_LOCATION}}")
+  (subpath "{{DIRECTORY_LOCATION}}")
 )
 
 (allow file-read*

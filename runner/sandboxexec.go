@@ -53,16 +53,15 @@ func (ser *sandboxExecRunner) Run() error {
 	params := ser.params
 
 	fmt.Printf("Creating shim app bundle to enable sandboxing")
-	realBundlePath := params.FullTargetPath
 
-  binaryPath := realBundlePath;
-	/* binaryPath, err := macutil.GetExecutablePath(realBundlePath)
+  /* binaryPath := params.FullTargetPath;
+	binaryPath, err := macutil.GetExecutablePath(realBundlePath)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	} */
 	// binaryName := filepath.Base(binaryPath)
 
-	sandboxProfilePath := filepath.Join(params.Dir, ".isolator", "isolate-app.sb")
+	sandboxProfilePath := filepath.Join(params.InstallFolder, ".isolator", "isolate-app.sb")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err := os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
@@ -75,17 +74,17 @@ func (ser *sandboxExecRunner) Run() error {
 	} */
 
 	sandboxSource := policies.SandboxExecTemplate
-	/* sandboxSource = strings.Replace(
+	sandboxSource = strings.Replace(
 		sandboxSource,
-		"{{USER_LIBRARY}}",
-		userLibrary,
-		-1, /* replace all instances
-	) */
+		"{{DIRECTORY_LOCATION}}",
+		params.Dir,
+		-1, // replace all instances
+	)
 	sandboxSource = strings.Replace(
 		sandboxSource,
 		"{{INSTALL_LOCATION}}",
-		params.Dir,
-		-1, /* replace all instances */
+		params.InstallFolder,
+		-1, // replace all instances
 	)
 
 	err = ioutil.WriteFile(sandboxProfilePath, []byte(sandboxSource), 0644)
@@ -101,7 +100,7 @@ func (ser *sandboxExecRunner) Run() error {
 
 	shimBundlePath := filepath.Join(
 		workDir,
-		filepath.Base(realBundlePath),
+		"shim.sh",
 	)
 	fmt.Printf("Generating shim bundle as (%s)", shimBundlePath)
 
@@ -122,7 +121,7 @@ func (ser *sandboxExecRunner) Run() error {
 		`,
 		params.Dir,
 		sandboxProfilePath,
-		binaryPath,
+		params.FullTargetPath,
 	)
 
 	err = ioutil.WriteFile(shimBinaryPath, []byte(shimBinaryContents), 0755)

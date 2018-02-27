@@ -31,7 +31,7 @@ type RunnerParams struct {
 
 	// PrereqsDir    string
 	// Credentials   *buse.GameCredentials
-	// InstallFolder string
+	InstallFolder string
 	Runtime       *manager.Runtime
 }
 

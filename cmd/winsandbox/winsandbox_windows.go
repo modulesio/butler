@@ -156,7 +156,7 @@ func Setup() error {
 	password := generatePassword()
 	fmt.Printf("Generated password (%s)", password)
 
-	comment := "itch.io sandbox user"
+	comment := "isolator sandbox user"
 
 	fmt.Printf("Adding user...")
 

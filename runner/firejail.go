@@ -107,7 +107,7 @@ func (fr *firejailRunner) Run() error {
 	fmt.Printf("Running (%s) through firejail", params.FullTargetPath)
 
 	var args []string
-	args = append(args, "--ro-bind", "/usr", "/usr", "--ro-bind", "/bin", "/bin", "--ro-bind", "/sbin", "/sbin", "--bind", params.Dir, params.Dir, "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64", "--proc", "/proc", "--dev", "/dev", "--unshare-all")
+	args = append(args, "--ro-bind", "/usr", "/usr", "--ro-bind", "/bin", "/bin", "--ro-bind", "/sbin", "/sbin", "--bind", params.Dir, params.Dir, "--bind", params.InstallFolder, params.InstallFolder, "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64", "--proc", "/proc", "--dev", "/dev", "--unshare-all")
 	args = append(args, params.FullTargetPath)
 	args = append(args, params.Args...)
 

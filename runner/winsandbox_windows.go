@@ -174,6 +174,7 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	}
 	defer winutil.SafeRelease(uintptr(impersonationToken))
 
+  // Dir
 	hasAccess, err := winutil.UserHasPermission(
 		impersonationToken,
 		syscallex.GENERIC_ALL,
@@ -189,9 +190,52 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 			Rights:      winutil.RightsFull,
 		})
 	}
-
 	// cf. https://github.com/itchio/itch/issues/1470
 	current := filepath.Dir(params.Dir)
+	for i := 0; i < 128; i++ { // dumb failsafe
+		fmt.Printf("Checking access for (%s)...", current)
+		hasAccess, err := winutil.UserHasPermission(
+			impersonationToken,
+			syscallex.GENERIC_READ,
+			current,
+		)
+		if err != nil {
+			return nil, errors.Wrap(err, 0)
+		}
+
+		if !hasAccess {
+			fmt.Printf("Will need to grant temporary read permission to (%s)", current)
+			sp.Entries = append(sp.Entries, &winutil.ShareEntry{
+				Path:        current,
+				Inheritance: winutil.InheritanceModeNone,
+				Rights:      winutil.RightsRead,
+			})
+		}
+		next := filepath.Dir(current)
+		if next == current {
+			break
+		}
+		current = next
+	}
+
+  // InstallFolder
+	hasAccess, err = winutil.UserHasPermission(
+		impersonationToken,
+		syscallex.GENERIC_ALL,
+		params.InstallFolder,
+	)
+	if err != nil {
+		return nil, errors.Wrap(err, 0)
+	}
+	if !hasAccess {
+		sp.Entries = append(sp.Entries, &winutil.ShareEntry{
+			Path:        params.InstallFolder,
+			Inheritance: winutil.InheritanceModeFull,
+			Rights:      winutil.RightsFull,
+		})
+	}
+	// cf. https://github.com/itchio/itch/issues/1470
+	current := filepath.Dir(params.InstallFolder)
 	for i := 0; i < 128; i++ { // dumb failsafe
 		fmt.Printf("Checking access for (%s)...", current)
 		hasAccess, err := winutil.UserHasPermission(

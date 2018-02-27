@@ -16,7 +16,7 @@ import (
 )
 
 var args = struct {
-	// directory     *string
+	directory     *string
   // installPath     *string
   // prereqsPath     *string
 	command *[]string
@@ -24,7 +24,7 @@ var args = struct {
 
 func Register(ctx *mansion.Context) {
 	cmd := ctx.App.Command("runner", "Runs a command").Default()
-	// args.directory = cmd.Flag("directory", "The working directory for the command").String()
+	args.directory = cmd.Flag("directory", "The working directory for the command").String()
   // args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").String()
   // args.prereqsPath = cmd.Flag("prereqsPath", "Prerequisites path for sandbox tools").Hidden().String()
 	args.command = cmd.Arg("command", "A command to run, with arguments").Strings()
@@ -55,15 +55,15 @@ func Do(ctx *mansion.Context) error {
     return nil;
   }
 
-  directory := filepath.Dir(command[0])
+  installPath := filepath.Dir(command[0])
   name := filepath.Base(command[0])
-	/* var directory string
+	var directory string
   if (*args.directory != "") {
     directory = *args.directory
   } else {
-    directory = filepath.Dir(command[0])
+    directory = installPath
   }
-  var installPath string
+  /* var installPath string
   if (*args.installPath != "") {
     installPath = *args.installPath
   } else {
@@ -108,7 +108,7 @@ func Do(ctx *mansion.Context) error {
 
 		// PrereqsDir:    prereqsPath,
 		// Credentials:   params.Credentials,
-		// InstallFolder: installPath,
+		InstallFolder: installPath,
 		Runtime:       manager.CurrentRuntime(),
 	}
 
