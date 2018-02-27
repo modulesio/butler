@@ -45,10 +45,6 @@ const SandboxExecTemplate = `
   (subpath "/Library/Audio")
   (subpath "/Library/Fonts")
 
-  (subpath "{{USER_LIBRARY}}/Keyboard Layouts")
-  (subpath "{{USER_LIBRARY}}/Input Methods")
-  (subpath "{{USER_LIBRARY}}/Fonts")
-
   ;; FIXME that's a bit excessive, why are some apps
   ;; trying to read 'PkgInfo' files or 'rsrc' ?
   (subpath "/Applications")
