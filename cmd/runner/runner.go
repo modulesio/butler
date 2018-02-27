@@ -16,16 +16,16 @@ import (
 )
 
 var args = struct {
-	directory     *string
-  installPath     *string
+	// directory     *string
+  // installPath     *string
   // prereqsPath     *string
 	command *[]string
 }{}
 
 func Register(ctx *mansion.Context) {
 	cmd := ctx.App.Command("runner", "Runs a command").Default()
-	args.directory = cmd.Flag("directory", "The working directory for the command").String()
-  args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").String()
+	// args.directory = cmd.Flag("directory", "The working directory for the command").String()
+  // args.installPath = cmd.Flag("installPath", "Temporary install path for sandboxing").String()
   // args.prereqsPath = cmd.Flag("prereqsPath", "Prerequisites path for sandbox tools").Hidden().String()
 	args.command = cmd.Arg("command", "A command to run, with arguments").Strings()
 	ctx.Register(cmd, do)
@@ -55,7 +55,9 @@ func Do(ctx *mansion.Context) error {
     return nil;
   }
 
-	var directory string
+  directory := filepath.Dir(command[0])
+  name := filepath.Base(command[0])
+	/* var directory string
   if (*args.directory != "") {
     directory = *args.directory
   } else {
@@ -67,14 +69,14 @@ func Do(ctx *mansion.Context) error {
   } else {
     installPath = directory
   }
-  /* var prereqsPath string
+  var prereqsPath string
   if (*args.prereqsPath != "") {
     prereqsPath = *args.prereqsPath
   } else {
     prereqsPath = directory
   } */
 
-  fmt.Printf("running %s %s %d", command[0], directory, *args.directory != "")
+  fmt.Printf("running %s %s %d", command[0])
 
   runParams := &runner.RunnerParams{
 		// Consumer: consumer,
@@ -85,7 +87,7 @@ func Do(ctx *mansion.Context) error {
 
 		FullTargetPath: command[0],
 
-		Name:   directory,
+		Name:   name,
 		Dir:    directory,
 		Args:   command[1:],
 		Env:    os.Environ(),
@@ -95,7 +97,7 @@ func Do(ctx *mansion.Context) error {
 
 		// PrereqsDir:    prereqsPath,
 		// Credentials:   params.Credentials,
-		InstallFolder: installPath,
+		// InstallFolder: installPath,
 		Runtime:       manager.CurrentRuntime(),
 	}
 
