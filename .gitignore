@@ -1,7 +1,4 @@
 /isolator
-*.exe
-*.pwr*
+/isolator.exe
 .DS_Store
-_book
 node_modules
-*.syso
