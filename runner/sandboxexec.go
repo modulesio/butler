@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/go-errors/errors"
-	"github.com/modulesio/butler/runner/macutil"
+	// "github.com/modulesio/butler/runner/macutil"
 	"github.com/modulesio/butler/runner/policies"
 )
 
@@ -36,7 +36,7 @@ func (ser *sandboxExecRunner) Prepare() error {
 		err := cmd.Run()
 		if err != nil {
 			fmt.Printf("While verifying sandbox-exec: %s", err.Error())
-			return errors.New("Cannot set up itch.io sandbox, see logs for details")
+			return errors.New("Cannot set up isolator sandbox, see logs for details")
 		}
 	}
 
@@ -63,22 +63,22 @@ func (ser *sandboxExecRunner) Run() error {
 		return errors.Wrap(err, 0)
 	}
 
-	userLibrary, err := macutil.GetLibraryPath()
+	/* userLibrary, err := macutil.GetLibraryPath()
 	if err != nil {
 		return errors.Wrap(err, 0)
-	}
+	} */
 
 	sandboxSource := policies.SandboxExecTemplate
-	sandboxSource = strings.Replace(
+	/* sandboxSource = strings.Replace(
 		sandboxSource,
 		"{{USER_LIBRARY}}",
 		userLibrary,
-		-1, /* replace all instances */
-	)
+		-1, /* replace all instances
+	) */
 	sandboxSource = strings.Replace(
 		sandboxSource,
 		"{{INSTALL_LOCATION}}",
-		params.InstallFolder,
+		params.Dir,
 		-1, /* replace all instances */
 	)
 

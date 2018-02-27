@@ -93,11 +93,11 @@ func (wr *winsandboxRunner) Prepare() error {
 	}
 
 	wr.playerData = playerData
-  
-  err = os.MkdirAll(wr.params.InstallFolder, 0755)
+
+  /* err = os.MkdirAll(wr.params.InstallFolder, 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
-	}
+	}  */
 
 	fmt.Printf("Sandbox is ready")
 	return nil
@@ -177,21 +177,21 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	hasAccess, err := winutil.UserHasPermission(
 		impersonationToken,
 		syscallex.GENERIC_ALL,
-		params.InstallFolder,
+		params.Dir,
 	)
 	if err != nil {
 		return nil, errors.Wrap(err, 0)
 	}
 	if !hasAccess {
 		sp.Entries = append(sp.Entries, &winutil.ShareEntry{
-			Path:        params.InstallFolder,
+			Path:        params.Dir,
 			Inheritance: winutil.InheritanceModeFull,
 			Rights:      winutil.RightsFull,
 		})
 	}
 
 	// cf. https://github.com/itchio/itch/issues/1470
-	current := filepath.Dir(params.InstallFolder)
+	current := filepath.Dir(params.Dir)
 	for i := 0; i < 128; i++ { // dumb failsafe
 		fmt.Printf("Checking access for (%s)...", current)
 		hasAccess, err := winutil.UserHasPermission(
