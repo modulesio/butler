@@ -49,7 +49,7 @@ func Check(consumer *state.Consumer) error {
     return errors.Wrap(err, 0)
   }
 
-  firejailPath := filepath.Join(filepath.Dir(executable), "firejail", "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "bwrap")
   stats, err := os.Lstat(firejailPath)
   if err != nil {
     return errors.Wrap(err, 0)
@@ -61,7 +61,7 @@ func Check(consumer *state.Consumer) error {
   fmt.Printf("linux sandbox check %v %v", stats.Mode(), isSetuid)
 
   if (!isRoot || !isSetuid) {
-		return errors.Wrap(errors.New("can't work with 42"), 0)
+		return errors.Wrap(errors.New("bwrap is not setuid root"), 0)
   }
 
   return nil
@@ -87,7 +87,7 @@ func Setup() error {
     return errors.Wrap(err, 0)
   }
 
-  firejailPath := filepath.Join(filepath.Dir(executable), "firejail", "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "bwrap")
   err = os.Chown(firejailPath, 0, 0)
   if err != nil {
 		return errors.Wrap(err, 0)

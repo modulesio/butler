@@ -2,7 +2,7 @@ package runner
 
 import (
 	"fmt"
-	"io/ioutil"
+	// "io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -12,7 +12,7 @@ import (
 	"github.com/modulesio/butler/cmd/elevate"
 	"github.com/modulesio/butler/cmd/operate"
   "github.com/modulesio/butler/installer"
-	"github.com/modulesio/butler/runner/policies"
+	// "github.com/modulesio/butler/runner/policies"
 	"github.com/modulesio/butler/cmd/linuxsandbox"
 )
 
@@ -89,9 +89,9 @@ func (fr *firejailRunner) Run() error {
     return errors.Wrap(err, 0)
   }
 
-  firejailPath := filepath.Join(filepath.Dir(executable), "firejail", "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "bwrap")
 
-	sandboxProfilePath := filepath.Join(params.Dir, ".isolator", "isolate-app.profile")
+	/* sandboxProfilePath := filepath.Join(params.Dir, ".isolator", "isolate-app.profile")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err = os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
@@ -102,13 +102,12 @@ func (fr *firejailRunner) Run() error {
 	err = ioutil.WriteFile(sandboxProfilePath, []byte(sandboxSource), 0644)
 	if err != nil {
 		return errors.Wrap(err, 0)
-	}
+	} */
 
 	fmt.Printf("Running (%s) through firejail", params.FullTargetPath)
 
 	var args []string
-	args = append(args, fmt.Sprintf("--profile=%s", sandboxProfilePath))
-	args = append(args, "--")
+	args = append(args, "--ro-bind", "/usr", "/usr", "--ro-bind", "/bin", "/bin", "--ro-bind", "/sbin", "/sbin", "--bind", params.Dir, params.Dir, "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64", "--proc", "/proc", "--dev", "/dev", "--unshare-all")
 	args = append(args, params.FullTargetPath)
 	args = append(args, params.Args...)
 
