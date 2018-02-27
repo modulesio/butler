@@ -123,7 +123,7 @@ func (l *Launcher) Do(params *launch.LauncherParams) error {
 
 		// PrereqsDir:    params.PrereqsDir,
 		// Credentials:   params.Credentials,
-		InstallFolder: params.InstallFolder,
+		// InstallFolder: params.InstallFolder,
 		Runtime:       params.Runtime,
 	}
 

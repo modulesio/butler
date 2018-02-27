@@ -138,47 +138,6 @@ func Do(ctx *mansion.Context) error {
     // }
   }
 
-  /* launcherParams := &LauncherParams{
-		// Conn:     conn,
-		Ctx:      ctx,
-		// Consumer: consumer,
-
-		FullTargetPath: "/tmp",
-		// Candidate:      candidate,
-		// AppManifest:    appManifest,
-		// Action:         manifestAction,
-		Sandbox:        true,
-		Args:           [],
-		Env:            env,
-
-		PrereqsDir:    "/tmp/prereqs",
-		// Credentials:   params.Credentials,
-		InstallFolder: "/tmp/install",
-		Runtime:       manager.CurrentRuntime(),
-	}
-
-	err = launcher.Do(launcherParams)
-	if err != nil {
-		return errors.Wrap(err, 0)
-	} */
-
-	/* cmd := exec.Command(command[0], command[1:]...)
-	if dir != "" {
-		cmd.Dir = dir
-	}
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	err := cmd.Run()
-	if err != nil {
-		if exitError, ok := err.(*exec.ExitError); ok {
-			if status, ok := exitError.Sys().(syscall.WaitStatus); ok {
-				os.Exit(status.ExitStatus())
-			}
-		}
-		return errors.Wrap(err, 0)
-	} */
-
 	return nil
 }
 
