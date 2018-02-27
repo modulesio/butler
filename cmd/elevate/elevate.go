@@ -1,7 +1,7 @@
 package elevate
 
 import (
-	"fmt"
+	// "fmt"
 	"io"
 	"os"
 

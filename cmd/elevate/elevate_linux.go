@@ -3,7 +3,7 @@
 package elevate
 
 import (
-	"fmt"
+	// "fmt"
 	"os"
 	"os/exec"
 	"syscall"
