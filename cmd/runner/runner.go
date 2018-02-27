@@ -2,9 +2,10 @@ package runner
 
 import (
 	"fmt"
-	"regexp"
+	// "regexp"
 	"os"
 	"os/exec"
+  "os/user"
 	"path/filepath"
 	"syscall"
 	"runtime"
@@ -37,19 +38,28 @@ func do(ctx *mansion.Context) {
 
 func Do(ctx *mansion.Context) error {
 	command := *args.command
+  var err error
 
-  var matched bool
   if (len(command) > 0) {
-    r, err := regexp.Compile("^(?:/|\\.\\/|\\.\\.\\/|[a-zA-Z]:\\\\)")
+    if (command[0][:2] == "~/") {
+      usr, err := user.Current()
+      if err != nil {
+        return errors.Wrap(err, 0)
+      }
+
+      command[0] = filepath.Join(usr.HomeDir, command[0][2:])
+    }
+
+    /* command[0], err = filepath.Abs(command[0])
     if err != nil {
       return errors.Wrap(err, 0)
     }
 
-    matched = r.MatchString(command[0])
+    r, err := regexp.Compile("^(?:/|[a-zA-Z]:\\\\)")
+    if err != nil {
+      return errors.Wrap(err, 0)
+    } */
   } else {
-    matched = false
-  }
-  if (!matched) {
     var args []string;
     ctx.App.Usage(args);
     return nil;
@@ -61,7 +71,26 @@ func Do(ctx *mansion.Context) error {
   if (*args.directory != "") {
     directory = *args.directory
   } else {
-    directory = installPath
+    executable, err := os.Executable()
+    if err != nil {
+      return errors.Wrap(err, 0)
+    }
+
+    directory = filepath.Dir(executable)
+  }
+
+  if (directory[:2] == "~/") {
+    usr, err := user.Current()
+    if err != nil {
+      return errors.Wrap(err, 0)
+    }
+
+    directory = filepath.Join(usr.HomeDir, directory[2:])
+  }
+
+  directory, err = filepath.Abs(directory)
+  if err != nil {
+    return errors.Wrap(err, 0)
   }
   /* var installPath string
   if (*args.installPath != "") {
