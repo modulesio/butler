@@ -49,7 +49,7 @@ func Check(consumer *state.Consumer) error {
     return errors.Wrap(err, 0)
   }
 
-  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "firejail", "firejail")
   stats, err := os.Lstat(firejailPath)
   if err != nil {
     return errors.Wrap(err, 0)
@@ -87,7 +87,7 @@ func Setup() error {
     return errors.Wrap(err, 0)
   }
 
-  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "firejail", "firejail")
   err = os.Chown(firejailPath, 0, 0)
   if err != nil {
 		return errors.Wrap(err, 0)

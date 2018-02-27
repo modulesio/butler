@@ -89,7 +89,7 @@ func (fr *firejailRunner) Run() error {
     return errors.Wrap(err, 0)
   }
 
-  firejailPath := filepath.Join(filepath.Dir(executable), "bin", "firejail")
+  firejailPath := filepath.Join(filepath.Dir(executable), "firejail", "firejail")
 
 	sandboxProfilePath := filepath.Join(params.Dir, ".isolator", "isolate-app.profile")
 	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
