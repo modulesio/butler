@@ -1,8 +1,8 @@
 package runner
 
 import (
-	// "os"
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -94,10 +94,10 @@ func (wr *winsandboxRunner) Prepare() error {
 
 	wr.playerData = playerData
 
-  /* err = os.MkdirAll(wr.params.InstallFolder, 0755)
+  err = os.MkdirAll(filepath.Join(wr.params.Dir, ".isolator"), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
-	}  */
+	}
 
 	fmt.Printf("Sandbox is ready")
 	return nil
@@ -189,6 +189,22 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	if !hasAccess {
 		sp.Entries = append(sp.Entries, &winutil.ShareEntry{
 			Path:        params.Dir,
+			Inheritance: winutil.InheritanceModeFull,
+			Rights:      winutil.RightsFull,
+		})
+	}
+  isolatorPath := filepath.Join(params.Dir, ".isolator")
+  hasAccess, err = winutil.UserHasPermission(
+		impersonationToken,
+		syscallex.GENERIC_ALL,
+		isolatorPath,
+	)
+	if err != nil {
+		return nil, errors.Wrap(err, 0)
+	}
+	if !hasAccess {
+		sp.Entries = append(sp.Entries, &winutil.ShareEntry{
+			Path:        isolatorPath,
 			Inheritance: winutil.InheritanceModeFull,
 			Rights:      winutil.RightsFull,
 		})
