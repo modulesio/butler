@@ -77,12 +77,10 @@ func Do(ctx *mansion.Context) error {
   if (*args.directory != "") {
     directory = *args.directory
   } else {
-    executable, err := os.Executable()
+    directory, err = os.Getwd()
     if err != nil {
       return errors.Wrap(err, 0)
     }
-
-    directory = filepath.Dir(executable)
   }
 
   if (directory[:2] == "~/") {
