@@ -75,10 +75,11 @@ func (fr *firejailRunner) Run() error {
   if err != nil {
     return errors.Wrap(err, 0)
   }
+  configPath := filepath.Join(usr.HomeDir, ".config")
   nvmPath := filepath.Join(usr.HomeDir, ".nvm")
 
 	var args []string
-	args = append(args, "--ro-bind", "/usr", "/usr", "--ro-bind", "/bin", "/bin", "--ro-bind", "/sbin", "/sbin", "--bind", params.Dir, params.Dir, "--bind", params.InstallFolder, params.InstallFolder, "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64", "--ro-bind", nvmPath, nvmPath, "--proc", "/proc", "--dev", "/dev", "--unshare-all")
+	args = append(args, "--ro-bind", "/usr", "/usr", "--ro-bind", "/bin", "/bin", "--ro-bind", "/sbin", "/sbin", "--bind", params.Dir, params.Dir, "--bind", params.InstallFolder, params.InstallFolder, "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64", "--ro-bind", "/etc", "/etc", "--ro-bind", configPath, configPath, "--ro-bind", nvmPath, nvmPath, "--proc", "/proc", "--dev", "/dev", "--unshare-all", "--share-net")
 	args = append(args, params.FullTargetPath)
 	args = append(args, params.Args...)
 
