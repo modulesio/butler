@@ -141,10 +141,13 @@ func (wr *winsandboxRunner) Run() error {
 	cmd.Password = pd.Password
 	cmd.Dir = params.Dir
 	cmd.Env = env
+	cmd.Stdin = params.Stdin
 	cmd.Stdout = params.Stdout
 	cmd.Stderr = params.Stderr
 	cmd.SysProcAttr = &syscallex.SysProcAttr{
-		LogonFlags: syscallex.LOGON_WITH_PROFILE,
+    LogonFlags: syscallex.LOGON_WITH_PROFILE,
+    // CreationFlags: 0x08000000,
+    // HideWindow: true,
 	}
 
 	err = cmd.Run()
