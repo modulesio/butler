@@ -3,7 +3,6 @@
 package runner
 
 import (
-	"fmt"
 	"syscall"
 	"time"
 	"unsafe"
@@ -50,8 +49,6 @@ func SetupJobObject() error {
 
 	err = syscallex.AssignProcessToJobObject(jobObject, currentProcess)
 	if err != nil {
-		fmt.Printf("No job object support (%s)", err.Error())
-		fmt.Printf("The 'Running...' indicator and 'Force close' functionality will not work as expected, and ")
 		return nil
 	}
 
@@ -94,7 +91,6 @@ func WaitJobObject() error {
 
 		if processIdList.NumberOfAssignedProcesses <= 1 {
 			// it's just us left? quit!
-			fmt.Printf("Done waiting for job object after %d rounds", rounds)
 			return nil
 		}
 

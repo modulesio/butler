@@ -40,7 +40,6 @@ func (ser *sandboxExecRunner) Prepare() error {
 			waitStatus := exitErr.Sys().(syscall.WaitStatus)
 			exitStatus := waitStatus.ExitStatus()
 			if (exitStatus != 64) {
-				// fmt.Printf("While verifying sandbox-exec: %v", exitStatus)
 				return errors.New("Cannot run sandbox-exec")
 		  }
 		}
@@ -52,26 +51,11 @@ func (ser *sandboxExecRunner) Prepare() error {
 func (ser *sandboxExecRunner) Run() error {
 	params := ser.params
 
-	fmt.Printf("Creating shim app bundle to enable sandboxing")
-
-  /* binaryPath := params.FullTargetPath;
-	binaryPath, err := macutil.GetExecutablePath(realBundlePath)
-	if err != nil {
-		return errors.Wrap(err, 0)
-	} */
-	// binaryName := filepath.Base(binaryPath)
-
 	sandboxProfilePath := filepath.Join(params.InstallFolder, ".isolator", "isolate-app.sb")
-	fmt.Printf("Writing sandbox profile to (%s)", sandboxProfilePath)
 	err := os.MkdirAll(filepath.Dir(sandboxProfilePath), 0755)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
-
-	/* userLibrary, err := macutil.GetLibraryPath()
-	if err != nil {
-		return errors.Wrap(err, 0)
-	} */
 
 	sandboxSource := policies.SandboxExecTemplate
 	sandboxSource = strings.Replace(
@@ -102,7 +86,6 @@ func (ser *sandboxExecRunner) Run() error {
 		workDir,
 		"shim.sh",
 	)
-	fmt.Printf("Generating shim bundle as (%s)", shimBundlePath)
 
 	shimBinaryPath := filepath.Join(
 		shimBundlePath,
@@ -146,13 +129,10 @@ func (ser *sandboxExecRunner) Run() error {
 	} */
 
 	if investigateSandbox {
-		fmt.Printf("Wrote shim app to (%s), waiting forever because INVESTIGATE_SANDBOX is set to 1")
 		for {
 			time.Sleep(1 * time.Second)
 		}
 	}
-
-	fmt.Printf("All set, hope for the best")
 
 	return RunAppBundle(
 		params,

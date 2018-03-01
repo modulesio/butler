@@ -116,8 +116,6 @@ func Do(ctx *mansion.Context) error {
     return errors.Wrap(err, 0)
   }
 
-  fmt.Printf("running %s %s %d", command[0])
-
   env := os.Environ()
   nodeReplHistory := "NODE_REPL_HISTORY=" + filepath.Join(directory, ".isolator", ".node_repl_history")
   env = append(env, nodeReplHistory)
@@ -175,10 +173,9 @@ func Do(ctx *mansion.Context) error {
 
     exeName := filepath.Base(runParams.FullTargetPath)
     msg := fmt.Sprintf("Exit code 0x%x (%d) for (%s)", uint32(exitCode), signedExitCode, exeName)
-    fmt.Printf(msg)
 
     /* if runDuration.Seconds() > 10 {
-      fmt.Printf("That's after running for %s, ignoring non-zero exit code", runDuration)
+      // That's after running for %s, ignoring non-zero exit code
     } else { */
       return errors.New(msg)
     // }

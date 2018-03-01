@@ -2,7 +2,6 @@ package runner
 
 import (
 	"os"
-	"fmt"
 	"os/exec"
 
 	"github.com/go-errors/errors"
@@ -37,8 +36,6 @@ func (ar *appRunner) Run() error {
 }
 
 func RunAppBundle(params *RunnerParams, binPath string) error {
-	fmt.Printf("Actual binary is (%s) %v", binPath, params.Args)
-
 	cmd := exec.Command(binPath, params.Args...)
 	cmd.Stdin = os.Stdin
   cmd.Stdout = os.Stdout

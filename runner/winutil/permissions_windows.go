@@ -331,11 +331,6 @@ type errorCoalescer struct {
 func (ec *errorCoalescer) Record(err error) {
 	if err != nil {
 		ec.errors = append(ec.errors, err)
-		if se, ok := err.(*errors.Error); ok {
-			fmt.Printf("While %s: %s", ec.operation, se.ErrorStack())
-		} else {
-			fmt.Printf("While %s: %s", ec.operation, err.Error())
-		}
 	}
 }
 
@@ -386,8 +381,6 @@ func UserHasPermission(impersonationToken syscall.Handle, accessDesired uint32, 
 		0,
 		&securityDescriptorLength,
 	)
-  
-  fmt.Printf("check permission %s", path);
 
 	// allow 0-length allocations
 	securityDescriptor := make([]byte, securityDescriptorLength+1)

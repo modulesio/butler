@@ -41,22 +41,6 @@ func (wr *winsandboxRunner) Prepare() error {
 	nullConsumer := &state.Consumer{}
 	err := winsandbox.Check(nullConsumer)
 	if err != nil {
-		fmt.Printf("Sandbox check failed: %s", err.Error())
-
-		/* ctx := wr.params.Ctx
-		conn := wr.params.Conn
-
-		var r buse.AllowSandboxSetupResponse
-		err := conn.Call(ctx, "AllowSandboxSetup", &buse.AllowSandboxSetupParams{}, &r)
-		if err != nil {
-			return errors.Wrap(err, 0)
-		}
-
-		if !r.Allow {
-			return operate.ErrAborted
-		} */
-		fmt.Printf("Proceeding with sandbox setup...")
-
 		res, err := installer.RunSelf(&installer.RunSelfParams{
 			Consumer: nullConsumer,
 			Args: []string{
@@ -80,7 +64,6 @@ func (wr *winsandboxRunner) Prepare() error {
 			return errors.Wrap(err, 0)
 		}
 
-		fmt.Printf("Sandbox setup done, checking again...")
 		err = winsandbox.Check(nullConsumer)
 		if err != nil {
 			return errors.Wrap(err, 0)
@@ -99,7 +82,6 @@ func (wr *winsandboxRunner) Prepare() error {
 		return errors.Wrap(err, 0)
 	}
 
-	fmt.Printf("Sandbox is ready")
 	return nil
 }
 
@@ -107,8 +89,6 @@ func (wr *winsandboxRunner) Run() error {
 	var err error
 	params := wr.params
 	pd := wr.playerData
-
-	fmt.Printf("Running as user (%s)", pd.Username)
 
 	env, err := wr.getEnvironment()
 	if err != nil {
@@ -119,8 +99,6 @@ func (wr *winsandboxRunner) Run() error {
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
-
-	fmt.Printf("Sharing policy: %s", sp)
 
 	err = sp.Grant()
 	if err != nil {
@@ -212,7 +190,6 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	// cf. https://github.com/itchio/itch/issues/1470
 	current := filepath.Dir(params.Dir)
 	for i := 0; i < 128; i++ { // dumb failsafe
-		fmt.Printf("Checking access for (%s)...", current)
 		hasAccess, err := winutil.UserHasPermission(
 			impersonationToken,
 			syscallex.GENERIC_READ,
@@ -223,7 +200,6 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 		}
 
 		if !hasAccess {
-			fmt.Printf("Will need to grant temporary read permission to (%s)", current)
 			sp.Entries = append(sp.Entries, &winutil.ShareEntry{
 				Path:        current,
 				Inheritance: winutil.InheritanceModeNone,
@@ -256,7 +232,6 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 	// cf. https://github.com/itchio/itch/issues/1470
 	current = filepath.Dir(params.InstallFolder)
 	for i := 0; i < 128; i++ { // dumb failsafe
-		fmt.Printf("Checking access for (%s)...", current)
 		hasAccess, err := winutil.UserHasPermission(
 			impersonationToken,
 			syscallex.GENERIC_READ,
@@ -267,7 +242,6 @@ func (wr *winsandboxRunner) getSharingPolicy() (*winutil.SharingPolicy, error) {
 		}
 
 		if !hasAccess {
-			fmt.Printf("Will need to grant temporary read permission to (%s)", current)
 			sp.Entries = append(sp.Entries, &winutil.ShareEntry{
 				Path:        current,
 				Inheritance: winutil.InheritanceModeNone,
