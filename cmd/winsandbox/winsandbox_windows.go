@@ -140,46 +140,31 @@ func doSetup(ctx *mansion.Context) {
 func Setup() error {
 	startTime := time.Now()
 
-  fmt.Printf("Setup")
-
 	nullConsumer := &state.Consumer{}
 
 	err := Check(nullConsumer)
 	if err == nil {
-		fmt.Printf("Already set up properly!")
 		return nil
 	}
 
 	username := fmt.Sprintf("isolator-%x", time.Now().Unix())
-  fmt.Printf("Generated username (%s)", username)
-
 	password := generatePassword()
-	fmt.Printf("Generated password (%s)", password)
-
 	comment := "isolator sandbox user"
-
-	fmt.Printf("Adding user...")
 
 	err = winutil.AddUser(username, password, comment)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	fmt.Printf("Removing from Users group (so it doesn't show up as a login option)...")
-
 	err = winutil.RemoveUserFromUsersGroup(username)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
 
-	fmt.Printf("Loading profile for the first time (to create some directories)...")
-
 	err = winutil.LoadProfileOnce(username, ".", password)
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
-
-	fmt.Printf("Saving to credentials registry...")
 
 	pd := &PlayerData{
 		Username: username,
@@ -189,8 +174,6 @@ func Setup() error {
 	if err != nil {
 		return errors.Wrap(err, 0)
 	}
-
-	fmt.Printf("All done! (in %s)", time.Since(startTime))
 
 	return nil
 }
