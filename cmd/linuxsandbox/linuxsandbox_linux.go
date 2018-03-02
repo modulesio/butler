@@ -11,7 +11,6 @@ package linuxsandbox
 
 import (
 	"os"
-	"fmt"
 	"syscall"
 	"path/filepath"
 	// "time"
@@ -58,8 +57,6 @@ func Check(consumer *state.Consumer) error {
   isRoot := stats.Sys().(*syscall.Stat_t).Uid == 0
   isSetuid := (stats.Mode() & os.ModeSetuid) != 0
 
-  fmt.Printf("linux sandbox check %v %v", stats.Mode(), isSetuid)
-
   if (!isRoot || !isSetuid) {
 		return errors.Wrap(errors.New("bwrap is not setuid root"), 0)
   }
@@ -72,13 +69,10 @@ func doSetup(ctx *mansion.Context) {
 }
 
 func Setup() error {
-  fmt.Printf("Setup")
-
 	nullConsumer := &state.Consumer{}
 
 	err := Check(nullConsumer)
 	if err == nil {
-		fmt.Printf("Already set up properly!")
 		return nil
 	}
 
